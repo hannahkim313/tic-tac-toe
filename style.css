@@ -14,9 +14,11 @@ body {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    display: grid;
-    grid-template-columns: auto;
-    grid-template-rows: auto 64px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 a {
@@ -32,17 +34,57 @@ button:hover {
 /******************************************************************************/
 
 main {
-    grid-column: 1 / 1;
-    grid-row: 1 / 2;
     justify-self: center;
     align-self: center;
 }
 
 /******************************************************************************/
-/* Selectors for the players page start here.
+/* 1. Selectors for the players page start here.
 /******************************************************************************/
 
 .players-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+}
+
+/* Selectors for the back button start here. */
+
+.back {
+    padding: 4px 16px;
+
+    background-color: white;
+    border: none;
+    border-radius: 16px;
+    box-shadow: var(--box-shadow-thin);
+
+    transition-duration: 0.4s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.back:hover {
+    color: white;
+    
+    background-color: var(--green);
+}
+
+.back img {
+    width: 1rem;
+}
+
+.back .white {
+    display: none;
+}
+
+/* Selectors for the form start here. */
+
+form {
     padding: 72px 32px;
     
     background-color: white;
@@ -56,7 +98,7 @@ main {
     gap: 32px;
 }
 
-.players-page > button {
+form > button {
     margin-top: 24px;
 
     padding: 4px 16px;
@@ -69,7 +111,7 @@ main {
     transition-duration: 0.4s;
 }
 
-.players-page > button:hover {
+form > button:hover {
     color: white;
 
     background-color: var(--green);
@@ -77,9 +119,7 @@ main {
     transition-duration: 0.4s;
 }
 
-/******************************************************************************/
-/* Selectors for the players start here.
-/******************************************************************************/
+/* Selectors for the players start here. */
 
 .players {
     display: flex;
@@ -105,7 +145,7 @@ main {
     position: relative;
 }
 
-.img-container {
+.profile-icons .img-container {
     padding: 32px;
 
     border: 2px solid var(--main-grey);
@@ -184,7 +224,7 @@ button.right:hover {
 input {
     padding: 2px 20px 2px 5px;
 
-    background-color: var(--main-grey);
+    background-color: white;
     border: none;
     border-radius: 8px;
     box-shadow: var(--box-shadow-thin);
@@ -221,9 +261,6 @@ footer {
     height: 64px;
 
     background-color: #ffffff86;
-
-    grid-column: 1 / 1;
-    grid-row: 2 / 3;
 
     display: flex;
     justify-content: center;
