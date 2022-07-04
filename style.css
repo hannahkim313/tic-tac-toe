@@ -1,0 +1,231 @@
+:root {
+    --green: #5D9D8F;
+    --light-cream: #F8F5F0;
+    --main-grey: #f0f0f0;
+    --hover-grey: #e0e0e0d1;
+
+    --box-shadow-thin: 1px 1px 3px #d4d4d4, -1px 1px 3px #dfdfdf;
+}
+
+body {
+    color: #585563;
+
+    background-image: url("img/tropical-bg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto 64px;
+}
+
+a {
+    text-decoration: none;
+}
+
+button:hover {
+    cursor: pointer;
+}
+
+/******************************************************************************/
+/* Selectors for the main section start here.
+/******************************************************************************/
+
+main {
+    grid-column: 1 / 1;
+    grid-row: 1 / 2;
+    justify-self: center;
+    align-self: center;
+}
+
+/******************************************************************************/
+/* Selectors for the players page start here.
+/******************************************************************************/
+
+.players-page {
+    padding: 72px 32px;
+    
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: 3px 3px 8px #3d685e4d, -3px 3px 8px #3d685e4d;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: 32px;
+}
+
+.players-page > button {
+    margin-top: 24px;
+
+    padding: 4px 16px;
+    
+    background-color: white;
+    border: none;
+    border-radius: 16px;
+    box-shadow: var(--box-shadow-thin);
+
+    transition-duration: 0.4s;
+}
+
+.players-page > button:hover {
+    color: white;
+
+    background-color: var(--green);
+
+    transition-duration: 0.4s;
+}
+
+/******************************************************************************/
+/* Selectors for the players start here.
+/******************************************************************************/
+
+.players {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 32px;
+}
+
+.player-one,
+.player-two {
+    padding: 8px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+/* Selectors for the player icons start here. */
+
+.profile-icons {
+    position: relative;
+}
+
+.img-container {
+    padding: 32px;
+
+    border: 2px solid var(--main-grey);
+    border-radius: 50%;
+}
+
+.profile-icons img[src*="png"] {
+    width: 85px;
+}
+
+img[src*="pencil"] {
+    width: 1.5rem;
+}
+
+button.left {
+    width: 30px;
+    height: 32px;
+    
+    margin-top: auto;
+    margin-bottom: auto;
+    
+    border: none;
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
+    
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 2px;
+
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    transition-duration: 0.2s;
+}
+
+button.right {
+    width: 30px;
+    height: 32px;
+    
+    margin-top: auto;
+    margin-bottom: auto;
+    
+    border: none;
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+    
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 2px;
+
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    transition-duration: 0.2s;
+}
+
+button.left:hover,
+button.right:hover {
+    background-color: var(--hover-grey);
+
+    transition-duration: 0.2s;
+}
+
+/* Selectors for the player name settings start here. */
+
+.name-settings {
+    margin-top: 8px;
+
+    position: relative;
+}
+
+input {
+    padding: 2px 20px 2px 5px;
+
+    background-color: var(--main-grey);
+    border: none;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow-thin);
+}
+
+input:focus {
+    outline-color: var(--green);
+}
+
+label {
+    height: 40px;
+    
+    padding: 8px;
+    
+    margin-top: auto;
+    margin-bottom: auto;
+
+    background-color: var(--light-cream);
+    border-radius: 8px;
+    box-shadow: var(--box-shadow-thin);
+
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: -1px;
+}
+
+/******************************************************************************/
+/* Selectors for the footer start here.
+/******************************************************************************/
+
+footer {
+    width: 100%;
+    height: 64px;
+
+    background-color: #ffffff86;
+
+    grid-column: 1 / 1;
+    grid-row: 2 / 3;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

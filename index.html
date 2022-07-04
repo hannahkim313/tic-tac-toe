@@ -5,6 +5,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Tic Tac Toe</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neucha&family=Patrick+Hand&display=swap">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="reset.css">
@@ -12,22 +15,46 @@
     </head>
     <body>
         <main>
-            <div class="home-page">
-                <h1>Tic-Tac-Toe</h1>
+            <section class="home-page">
+                <!-- Contents for home page go here -->
+            </section>
+
+            <form action="" method="" class="players-page">
+                <h2>Players</h2>
                 <div class="players">
                     <article class="player-one">
                         <h3>Player 1</h3>
-                        <div class="profile-photos">
-                            <img src="img/cat.png" alt="Cat icon" class="slides">
-                            <img src="img/elephant.png" alt="Elephant icon" class="slides">
-                            <img src="img/koala.png" alt="Koala icon" class="slides">
-                            <img src="img/monkey.png" alt="Monkey icon" class="slides">
-                            <img src="img/owl.png" alt="Owl icon" class="slides">
-                            <img src="img/panda.png" alt="Panda icon" class="slides">
-                            <img src="img/rabbit.png" alt="Rabbit icon" class="slides">
-                            <img src="img/sheep.png" alt="Sheep icon" class="slides">
-                            <img src="img/snail.png" alt="Snail icon" class="slides">
-                            <img src="img/turtle.png" alt="Turtle icon" class="slides">
+                        <div class="profile-icons">
+                            <div class="img-container">
+                                <img src="img/cat.png" alt="Cat icon" class="slides">
+                            </div>
+                            <!-- <div class="img-container">
+                                <img src="img/elephant.png" alt="Elephant icon" class="slides">
+                            </div>
+                            <div class="img-container">
+                                <img src="img/koala.png" alt="Koala icon" class="slides">
+                            </div>
+                            <div class="img-container">
+                                <img src="img/monkey.png" alt="Monkey icon" class="slides">
+                            </div>
+                            <div class="img-container">
+                                <img src="img/owl.png" alt="Owl icon" class="slides">
+                            </div>
+                            <div class="img-container">
+                                <img src="img/panda.png" alt="Panda icon" class="slides">
+                            </div>
+                            <div class="img-container">
+                                <img src="img/rabbit.png" alt="Rabbit icon" class="slides">
+                            </div>
+                            <div class="img-container">
+                                <img src="img/sheep.png" alt="Sheep icon" class="slides">
+                            </div>
+                            <div class="img-container">
+                                <img src="img/snail.png" alt="Snail icon" class="slides">
+                            </div>
+                            <div class="img-container">
+                                <img src="img/turtle.png" alt="Turtle icon" class="slides">
+                            </div> -->
                             <button class="left">
                                 <img src="img/left.svg" alt="Chevron left">
                             </button>
@@ -36,30 +63,51 @@
                             </button>
                         </div>
                         <div class="name-settings">
-                            <input
-                                type="text"
-                                id="player_one_name"
-                                maxlength="15"
-                                placeholder="Player 1"
-                            >
                             <label for="player_one_name">
                                 <img src="img/pencil.png" alt="Pencil icon to change player name">
                             </label>
+                            <input
+                                type="text"
+                                id="player_one_name"
+                                name="player_one_name"
+                                maxlength="15"
+                                placeholder="Player 1"
+                            >
                         </div>
                     </article>
                     <article class="player-two">
                         <h3>Player 2</h3>
-                        <div class="profile-photos">
-                            <img src="img/cat.png" alt="Cat icon" class="slides">
-                            <img src="img/elephant.png" alt="Elephant icon" class="slides">
-                            <img src="img/koala.png" alt="Koala icon" class="slides">
-                            <img src="img/monkey.png" alt="Monkey icon" class="slides">
-                            <img src="img/owl.png" alt="Owl icon" class="slides">
-                            <img src="img/panda.png" alt="Panda icon" class="slides">
-                            <img src="img/rabbit.png" alt="Rabbit icon" class="slides">
-                            <img src="img/sheep.png" alt="Sheep icon" class="slides">
-                            <img src="img/snail.png" alt="Snail icon" class="slides">
-                            <img src="img/turtle.png" alt="Turtle icon" class="slides">
+                        <div class="profile-icons">
+                            <div class="img-container">
+                                <img src="img/cat.png" alt="Cat icon" class="slides">
+                            </div>
+                            <!-- <div class="img-container">
+                                <img src="img/elephant.png" alt="Elephant icon" class="slides">
+                            </div>
+                            <div class="img-container">
+                                <img src="img/koala.png" alt="Koala icon" class="slides">
+                            </div>
+                            <div class="img-container">
+                                <img src="img/monkey.png" alt="Monkey icon" class="slides">
+                            </div>
+                            <div class="img-container">
+                                <img src="img/owl.png" alt="Owl icon" class="slides">
+                            </div>
+                            <div class="img-container">
+                                <img src="img/panda.png" alt="Panda icon" class="slides">
+                            </div>
+                            <div class="img-container">
+                                <img src="img/rabbit.png" alt="Rabbit icon" class="slides">
+                            </div>
+                            <div class="img-container">
+                                <img src="img/sheep.png" alt="Sheep icon" class="slides">
+                            </div>
+                            <div class="img-container">
+                                <img src="img/snail.png" alt="Snail icon" class="slides">
+                            </div>
+                            <div class="img-container">
+                                <img src="img/turtle.png" alt="Turtle icon" class="slides">
+                            </div> -->
                             <button class="left">
                                 <img src="img/left.svg" alt="Chevron left">
                             </button>
@@ -68,24 +116,25 @@
                             </button>
                         </div>
                         <div class="name-settings">
-                            <input
-                                type="text"
-                                id="player_two_name"
-                                maxlength="15"
-                                placeholder="Player 2"
-                            >
                             <label for="player_two_name">
                                 <img src="img/pencil.png" alt="Pencil icon to change player name">
                             </label>
+                            <input
+                                type="text"
+                                id="player_two_name"
+                                name="player_two_name"
+                                maxlength="15"
+                                placeholder="Player 2"
+                            >
                         </div>
                     </article>
                 </div>
-                <button type="button">Start Game</button>
-            </div>
+                <button type="submit">Start Game</button>
+            </form>
 
-            <div class="game-page">
+            <section class="game-page">
                 <!-- Contents for game page go here -->
-            </div>
+            </section>
         </main>
 
         <footer>
