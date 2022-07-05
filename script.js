@@ -2,6 +2,61 @@
 /* Module declarations start here.
 /******************************************************************************/
 
+/**
+ * Sections:
+ *   1. Home page
+ *   2. Players page
+ *   3. Game page
+ */
+
+/** Home page declarations start here. (1) */
+
+const playButton = (() => {
+
+    /** Variable declarations start here. */
+    
+    const homePage = document.querySelector(".home-page");
+    const playersPage = document.querySelector(".players-page");
+
+    const button = document.querySelector(".play");
+    const greenIcon = button.firstElementChild;
+    const whiteIcon = greenIcon.nextElementSibling;
+
+    /** Event listeners start here. */
+
+    button.addEventListener("mouseover", e => {
+        setTimeout(() => {
+            greenIcon.style.display = "none";
+            whiteIcon.style.display = "initial";
+        }, 200);
+    });
+
+    button.addEventListener("mouseout", e => {
+        setTimeout(() => {
+            greenIcon.style.display = "initial";
+            whiteIcon.style.display = "none";
+        }, 200);
+    });
+
+    button.addEventListener("click", e => {
+        homePage.style.display = "none";
+        playersPage.style.display = "flex";
+    });
+})();
+
+/** Players page declarations start here. (2) */
+
+const playersPage = (() => {
+
+    /** Variable declarations start here. */
+
+    const page = document.querySelector(".players-page");
+
+    /** Event listeners start here. */
+
+    window.addEventListener("pageshow", e => page.style.display = "none");
+})();
+
 const playerIconSelection = (() => {
 
     /** Variable declarations start here. */
@@ -105,6 +160,9 @@ const backButton = (() => {
 
     /** Variable declarations start here. */
 
+    const playersPage = document.querySelector(".players-page");
+    const homePage = document.querySelector(".home-page");
+
     const button = document.querySelector(".back");
     const greenArrow = button.firstElementChild;
     const whiteArrow = greenArrow.nextElementSibling;
@@ -124,4 +182,9 @@ const backButton = (() => {
             whiteArrow.style.display = "none";
         }, 200);
     });
+
+    button.addEventListener("click", e => {
+        playersPage.style.display = "none";
+        homePage.style.display = "flex";
+    })
 })();
