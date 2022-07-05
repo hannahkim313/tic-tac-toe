@@ -34,8 +34,57 @@ button:hover {
 /******************************************************************************/
 
 main {
-    justify-self: center;
-    align-self: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/******************************************************************************/
+/* Selectors for the home page start here.
+/******************************************************************************/
+
+.home-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.home-page h2 {
+    font-size: 3rem;
+}
+
+.play {
+    font-size: 1.5rem;
+
+    padding: 4px 16px;
+
+    background-color: white;
+    border: none;
+    border-radius: 16px;
+    box-shadow: var(--box-shadow-thin);
+
+    transition-duration: 0.4s;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.play:hover {
+    color: white;
+    
+    background-color: var(--green);
+}
+
+.play img {
+    width: 1.5rem;
+}
+
+.play .white {
+    display: none;
 }
 
 /******************************************************************************/
@@ -85,7 +134,7 @@ main {
 /* Selectors for the form start here. */
 
 form {
-    padding: 72px 32px;
+    padding: 64px 32px;
     
     background-color: white;
     border-radius: 16px;
