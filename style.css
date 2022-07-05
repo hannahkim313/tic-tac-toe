@@ -39,7 +39,7 @@ main {
 }
 
 /******************************************************************************/
-/* 1. Selectors for the players page start here.
+/* Selectors for the players page start here.
 /******************************************************************************/
 
 .players-page {
@@ -141,19 +141,19 @@ form > button:hover {
 
 /* Selectors for the player icons start here. */
 
-.profile-icons {
+.player-icons {
     position: relative;
 }
 
-.profile-icons .img-container {
-    padding: 32px;
+.player-icons .img-container {
+    padding: 40px;
 
     border: 2px solid var(--main-grey);
     border-radius: 50%;
 }
 
-.profile-icons img[src*="png"] {
-    width: 85px;
+.player-icons img[src*="png"] {
+    width: 75px;
 }
 
 img[src*="pencil"] {
