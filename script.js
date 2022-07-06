@@ -4,6 +4,7 @@
 
 /**
  * Sections:
+ * 
  *   1. Home page
  *   2. Players page
  *   3. Game page
@@ -187,4 +188,30 @@ const backButton = (() => {
         playersPage.style.display = "none";
         homePage.style.display = "flex";
     })
+})();
+
+const submitButton = (() => {
+
+    /** Variable declarations start here. */
+
+    const playersPage = document.querySelector(".players-page");
+    const gamePage = document.querySelector(".game-page");
+
+    const button = document.querySelector(".submit");
+
+    /** Event listeners start here. */
+
+    button.addEventListener("click", e => {
+        e.preventDefault();
+        playersPage.style.display = "none";
+        gamePage.style.display = "flex";
+    });
+})();
+
+/** Game page declarations start here. (3) */
+
+const gamePage = (() => {
+    const page = document.querySelector(".game-page");
+
+    window.addEventListener("pageshow", e => page.style.display = "none");
 })();

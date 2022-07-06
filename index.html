@@ -39,7 +39,7 @@
 
             <div class="players-page">
                 <form action="" method="">
-                    <h2>Players</h2>
+                    <h2>Player Selection</h2>
                     <div class="players">
                         <article class="player-one">
                             <h3>Player 1</h3>
@@ -93,7 +93,7 @@
                                     type="text"
                                     id="player_one_name"
                                     name="player_one_name"
-                                    maxlength="15"
+                                    maxlength="10"
                                     placeholder="Player 1"
                                 >
                             </div>
@@ -150,13 +150,13 @@
                                     type="text"
                                     id="player_two_name"
                                     name="player_two_name"
-                                    maxlength="15"
+                                    maxlength="10"
                                     placeholder="Player 2"
                                 >
                             </div>
                         </article>
                     </div>
-                    <button type="submit">Start Game</button>
+                    <button type="submit" class="submit">Start Game</button>
                 </form>
                 <button type="button" class="back">
                     <img
@@ -174,16 +174,91 @@
             </div>
 
             <section class="game-page">
-                <!-- Contents for game page go here -->
+                <article class="heading">
+                    <h2>Tic-Tac-Toe</h2>
+                    <p>Round 1</p>
+                </article>
+                <div class="content">
+                    <div class="game-play">
+                        <div class="player-one">
+                            <p>Mark: X</p>
+                            <div class="img-container"></div>
+                            <p class="name"></p>
+                            <p class="score"></p>
+                        </div>
+                        <div class="game-board">
+                            <div class="row">
+                                <button
+                                    type="button"
+                                    class="space"
+                                    data-index="0">
+                                </button>
+                                <button
+                                    type="button"
+                                    class="space"
+                                    data-index="1">
+                                </button>
+                                <button
+                                    type="button"
+                                    class="space"
+                                    data-index="2">
+                                </button>
+                            </div>
+                            <div class="row">
+                                <button
+                                    type="button"
+                                    class="space"
+                                    data-index="3">
+                                </button>
+                                <button
+                                    type="button"
+                                    class="space"
+                                    data-index="4">
+                                </button>
+                                <button
+                                    type="button"
+                                    class="space"
+                                    data-index="5">
+                                </button>
+                            </div>
+                            <div class="row">
+                                <button
+                                    type="button"
+                                    class="space"
+                                    data-index="6">
+                                </button>
+                                <button
+                                    type="button"
+                                    class="space"
+                                    data-index="7">
+                                </button>
+                                <button
+                                    type="button"
+                                    class="space"
+                                    data-index="8">
+                                </button>
+                            </div>
+                        </div>
+                        <div class="player-two">
+                            <p>Mark: O</p>
+                            <div class="img-container"></div>
+                            <p class="name"></p>
+                            <p class="score"></p>
+                        </div>
+                    </div>
+                    <div class="buttons">
+                        <button type="button" class="home">
+                            <img src="img/home.svg" alt="Home icon">
+                        </button>
+                        <button type="button" class="restart">
+                            <img src="img/refresh.svg" alt="Refresh icon">
+                        </button>
+                        <button type="button" class="github">
+                            <img src="img/github.svg" alt="Github icon">
+                        </button>
+                    </div>
+                </div>
             </section>
         </main>
-
-        <footer>
-            <a
-                href="https://github.com/hannahkim313">
-                <i class='fa fa-github'></i>
-                Hannah Kim
-            </a>
-        </footer>
     </body>
 </html>
