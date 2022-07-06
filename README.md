@@ -21,6 +21,4 @@ the game Tic Tac Toe.
 
 * [Pencil icon](https://www.flaticon.com/free-icon/pencil_3094216?related_id=3094216&origin=search) by [Freepik](https://www.freepik.com/author/freepik) at Flaticon
 
-* [Tic Tac Toe icon](https://www.flaticon.com/free-icon/tic-tac-toe_891988) by [Pixel Perfect](https://www.flaticon.com/authors/pixel-perfect) at Flaticon
-
 * Miscellaneous icons by [Material Design Icons](https://materialdesignicons.com/)
