@@ -67,11 +67,11 @@ const playerIconSelection = (() => {
 
     const playerIcons = document.querySelectorAll(".img-container");
 
-    const playerOneIcons = document.querySelectorAll(".player-one .img-container");
+    const playerOneIcons = document.querySelectorAll(".players .player-one .img-container");
     const playerOneLeftBtn = document.querySelector(".player-one .left");
     const playerOneRightBtn = document.querySelector(".player-one .right");
 
-    const playerTwoIcons = document.querySelectorAll(".player-two .img-container");
+    const playerTwoIcons = document.querySelectorAll(".players .player-two .img-container");
     const playerTwoLeftBtn = document.querySelector(".player-two .left");
     const playerTwoRightBtn = document.querySelector(".player-two .right");
 
