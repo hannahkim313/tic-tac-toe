@@ -3,121 +3,172 @@
 /******************************************************************************/
 
 /**
- * Sections:
+ *   Sections:
  * 
+ *   1. Helper functions
  *   1. Home page
  *   2. Players page
  *   3. Game page
  */
 
-/** Home page declarations start here. (1) */
+// Helper function declarations start here. (1) //
 
-const playButton = (() => {
+const helperFunctions = (() => {
 
-    /** Variable declarations start here. */
+    /**
+     * Changes the image displayed on a button during a mouseover event.
+     * @param {Object} initialImg - Element object of initial image.
+     * @param {Object} newImg - Element object of new image.
+     */
+    const changeOnMouseOver = (initialImg, newImg) => {
+        setTimeout(() => {
+            initialImg.style.display = "none";
+            newImg.style.display = "initial";
+        }, 200);
+    };
+
+    /**
+     * Changes the image displayed on a button during a mouseout event.
+     * @param {Object} initialImg - Element object of initial image.
+     * @param {Object} newImg - Element object of new image.
+     */
+    const changeOnmouseOut = (initialImg, newImg) => {
+        setTimeout(() => {
+            initialImg.style.display = "initial";
+            newImg.style.display = "none";
+        }, 200);
+    };
+
+    /**
+     * Changes page displayed on window.
+     * @param {Object} currentPage - Element object of current page.
+     * @param {Object} newPage - Element object of new page.
+     */
+    const switchPageDisplay = (currentPage, newPage) => {
+        currentPage.style.display = "none";
+        newPage.style.display = "flex";
+    };
+
+    return {
+        changeOnMouseOver,
+        changeOnmouseOut,
+        switchPageDisplay
+    }
+})();
+
+// Home page declarations start here. (2) //
+
+const homePage = (() => {
+
+    // Variable declarations start here.
     
     const homePage = document.querySelector(".home-page");
+
     const playersPage = document.querySelector(".players-page");
 
-    const button = document.querySelector(".play");
-    const greenIcon = button.firstElementChild;
+    const playButton = document.querySelector(".play");
+    const greenIcon = playButton.firstElementChild;
     const whiteIcon = greenIcon.nextElementSibling;
 
-    /** Event listeners start here. */
+    // Event listeners start here.
 
-    button.addEventListener("mouseover", e => {
-        setTimeout(() => {
-            greenIcon.style.display = "none";
-            whiteIcon.style.display = "initial";
-        }, 200);
+    playButton.addEventListener("mouseover", e => {
+        helperFunctions.changeOnMouseOver(greenIcon, whiteIcon)
     });
 
-    button.addEventListener("mouseout", e => {
-        setTimeout(() => {
-            greenIcon.style.display = "initial";
-            whiteIcon.style.display = "none";
-        }, 200);
+    playButton.addEventListener("mouseout", e => {
+        helperFunctions.changeOnmouseOut(greenIcon, whiteIcon);
     });
 
-    button.addEventListener("click", e => {
-        homePage.style.display = "none";
-        playersPage.style.display = "flex";
+    playButton.addEventListener("click", e => {
+        helperFunctions.switchPageDisplay(homePage, playersPage);
     });
 })();
 
-/** Players page declarations start here. (2) */
+// Players page declarations start here. (3) //
 
 const playersPage = (() => {
 
-    /** Variable declarations start here. */
+    // Variable declarations start here.
 
-    const page = document.querySelector(".players-page");
+    const homePage = document.querySelector(".home-page");
 
-    /** Event listeners start here. */
+    const playersPage = document.querySelector(".players-page");
+    const playerIcons = document.querySelectorAll(".players-page .img-container");
 
-    window.addEventListener("pageshow", e => page.style.display = "none");
-})();
-
-const playerIconSelection = (() => {
-
-    /** Variable declarations start here. */
-
+    const backButton = document.querySelector(".back");
+    const greenArrow = backButton.firstElementChild;
+    const whiteArrow = greenArrow.nextElementSibling;
+    
     let playerOneIndex = 1;
+    let playerOneSelectedIcon;
     let playerTwoIndex = 1;
-
-    const playerIcons = document.querySelectorAll(".img-container");
-
+    let playerTwoSelectedIcon;
+    
     const playerOneIcons = document.querySelectorAll(".players .player-one .img-container");
     const playerOneLeftBtn = document.querySelector(".player-one .left");
     const playerOneRightBtn = document.querySelector(".player-one .right");
-
+    
     const playerTwoIcons = document.querySelectorAll(".players .player-two .img-container");
     const playerTwoLeftBtn = document.querySelector(".player-two .left");
     const playerTwoRightBtn = document.querySelector(".player-two .right");
+    
+    const submitButton = document.querySelector(".submit");
 
-    /** Function declarations start here. */
+    const gamePage = document.querySelector(".game-page");
+    const playerOneGamePageIconContainer = document.querySelector(".game-page .player-one .img-container");
+    const playerTwoGamePageIconContainer = document.querySelector(".game-page .player-two .img-container");
+
+    // Function declarations start here.
 
     /**
-     * Displays the first player icon and hides the rest of the icons.
+     * Displays the first player icon and hides the rest of the icons
+     * upon page load.
      */
-    function loadIcons() {
-        for (icon of playerIcons) {
+     const loadIcons = () => {
+        for (const icon of playerIcons) {
             if (icon === playerIcons[0] || icon === playerIcons[10]) {
                 icon.style.display = "block";
             }
             else icon.style.display = "none";
         }
-    }
+    };
 
     /**
-     * Displays the next or previous icon in list for each player.
+     * Displays the next or previous icon in list of icons.
      * @param {Number} index - Index number of icon in list.
      * @param {String} player - Player number.
      */
-    function displayIcon(index, player) {
+     const displayIcon = (index, player) => {
         if (player === "one") {
-            for (icon of playerOneIcons) {
+            for (const icon of playerOneIcons) {
                 if (index > playerOneIcons.length) index = 1;
                 if (index < 1) index = playerOneIcons.length;
-                if (icon === playerOneIcons[index - 1]) icon.style.display = "block";
+                if (icon === playerOneIcons[index - 1]) {
+                    icon.style.display = "block";
+                    playerOneSelectedIcon = icon.firstElementChild;
+                }
                 else icon.style.display = "none";
             }
         }
         if (player === "two") {
-            for (icon of playerTwoIcons) {
+            for (const icon of playerTwoIcons) {
                 if (index > playerTwoIcons.length) index = 1;
                 if (index < 1) index = playerTwoIcons.length;
-                if (icon === playerTwoIcons[index - 1]) icon.style.display = "block";
+                if (icon === playerTwoIcons[index - 1]) {
+                    icon.style.display = "block";
+                    playerTwoSelectedIcon = icon.firstElementChild;
+                }
                 else icon.style.display = "none";
             }
         }
-    }
+    };
 
     /**
      * Checks if index is out of range and, if it is, resets the value.
      * @param {String} player - Player number.
      */
-    function resetIndex(player) {
+    const resetIndex = (player) => {
         if (player === "one") {
             if (playerOneIndex > playerOneIcons.length) playerOneIndex = 1;
             if (playerOneIndex < 1) playerOneIndex = playerOneIcons.length;
@@ -126,11 +177,26 @@ const playerIconSelection = (() => {
             if (playerTwoIndex > playerTwoIcons.length) playerTwoIndex = 1;
             if (playerTwoIndex < 1) playerTwoIndex = playerTwoIcons.length;
         }
-    }
+    };
 
-    /** Event listeners start here. */
+    // Event listeners start here.
 
-    window.addEventListener("pageshow", e => loadIcons());
+    window.addEventListener("pageshow", e => {
+        playersPage.style.display = "none";
+        loadIcons();
+    });
+
+    backButton.addEventListener("mouseover", e => {
+        helperFunctions.changeOnMouseOver(greenArrow, whiteArrow);
+    });
+    
+    backButton.addEventListener("mouseout", e => {
+        helperFunctions.changeOnmouseOut(greenArrow, whiteArrow);
+    });
+
+    backButton.addEventListener("click", e => {
+        helperFunctions.switchPageDisplay(playersPage, homePage);
+    });
     
     playerOneLeftBtn.addEventListener("click", e => {
         playerOneIndex--;
@@ -155,63 +221,24 @@ const playerIconSelection = (() => {
         displayIcon(playerTwoIndex, "two");
         resetIndex("two");
     });
-})();
 
-const backButton = (() => {
-
-    /** Variable declarations start here. */
-
-    const playersPage = document.querySelector(".players-page");
-    const homePage = document.querySelector(".home-page");
-
-    const button = document.querySelector(".back");
-    const greenArrow = button.firstElementChild;
-    const whiteArrow = greenArrow.nextElementSibling;
-    
-    /** Event listeners start here. */
-
-    button.addEventListener("mouseover", e => {
-        setTimeout(() => {
-            greenArrow.style.display = "none";
-            whiteArrow.style.display = "initial";
-        }, 200);
-    });
-    
-    button.addEventListener("mouseout", e => {
-        setTimeout(() => {
-            greenArrow.style.display = "initial";
-            whiteArrow.style.display = "none";
-        }, 200);
-    });
-
-    button.addEventListener("click", e => {
-        playersPage.style.display = "none";
-        homePage.style.display = "flex";
-    })
-})();
-
-const submitButton = (() => {
-
-    /** Variable declarations start here. */
-
-    const playersPage = document.querySelector(".players-page");
-    const gamePage = document.querySelector(".game-page");
-
-    const button = document.querySelector(".submit");
-
-    /** Event listeners start here. */
-
-    button.addEventListener("click", e => {
+    submitButton.addEventListener("click", e => {
         e.preventDefault();
-        playersPage.style.display = "none";
-        gamePage.style.display = "flex";
+        playerOneGamePageIconContainer.appendChild(playerOneSelectedIcon);
+        playerTwoGamePageIconContainer.appendChild(playerTwoSelectedIcon);
+        helperFunctions.switchPageDisplay(playersPage, gamePage);
     });
 })();
 
-/** Game page declarations start here. (3) */
+// Game page declarations start here. (4) //
 
 const gamePage = (() => {
-    const page = document.querySelector(".game-page");
 
-    window.addEventListener("pageshow", e => page.style.display = "none");
+    // Variable declarations start here.
+
+    const gamePage = document.querySelector(".game-page");
+
+    // Event listeners start here.
+
+    window.addEventListener("pageshow", e => gamePage.style.display = "none");
 })();
