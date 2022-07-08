@@ -49,10 +49,21 @@ const helperFunctions = (() => {
         newPage.style.display = "flex";
     };
 
+    /**
+     * Hides each element.
+     * @param  {...Object} args - Element object to hide.
+     */
+    const hideElements = (...args) => {
+        for (const element of args) {
+            element.style.display = "none";
+        }
+    };
+
     return {
         changeOnMouseOver,
         changeOnmouseOut,
-        switchPageDisplay
+        switchPageDisplay,
+        hideElements
     }
 })();
 
@@ -284,7 +295,7 @@ const playersPage = (() => {
     // Event listeners start here.
 
     window.addEventListener("pageshow", e => {
-        playersPage.style.display = "none";
+        helperFunctions.hideElements(playersPage);
         loadIcons();
     });
 
@@ -348,9 +359,32 @@ const gamePage = (() => {
 
     // Variable declarations start here.
 
+    const overlay = document.querySelector(".overlay");
+
     const gamePage = document.querySelector(".game-page");
+
+    const homeButton = document.querySelector(".home");
+    const homePopup = document.querySelector(".home-popup");
+    const yesButtonHome = document.querySelector(".home-popup .yes");
+    const noButtonHome = document.querySelector(".home-popup .no");
+
+    const refreshButton = document.querySelector(".refresh");
+    const githubButton = document.querySelector(".github");
 
     // Event listeners start here.
 
-    window.addEventListener("pageshow", e => gamePage.style.display = "none");
+    window.addEventListener("pageshow", e => {
+        helperFunctions.hideElements(gamePage, homePopup, overlay);
+    });
+
+    homeButton.addEventListener("click", e => {
+        homePopup.style.display = "flex";
+        overlay.style.display = "initial";
+    });
+
+    yesButtonHome.addEventListener("click", e => location.reload());
+
+    noButtonHome.addEventListener("click", e => {
+        helperFunctions.hideElements(homePopup, overlay);
+    })
 })();

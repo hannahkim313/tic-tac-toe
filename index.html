@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Tic Tac Toe</title>
+        <title>Tic-Tac-Toe</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Neucha&family=Patrick+Hand&display=swap">
@@ -14,11 +14,7 @@
         <script src="script.js" defer></script>
     </head>
     <body>
-        <!-- <header>
-            <div class="img-container"><img src="img/tic-tac-toe.png" alt="Tic-tac-toe icon"></div>
-            <h1>Tic-Tac-Toe</h1>
-        </header> -->
-
+        <div class="overlay"></div>
         <main>
             <section class="home-page">
                 <h2>Tic-Tac-Toe</h2>
@@ -326,11 +322,18 @@
                             <p class="score">0</p>
                         </div>
                     </div>
+                    <div class="home-popup">
+                        <p>Are you sure you want to quit?</p>
+                        <div class="buttons">
+                            <button class="yes">Yes</button>
+                            <button class="no">No</button>
+                        </div>
+                    </div>
                     <div class="buttons">
                         <button type="button" class="home">
                             <img src="img/home.svg" alt="Home icon">
                         </button>
-                        <button type="button" class="restart">
+                        <button type="button" class="refresh">
                             <img src="img/refresh.svg" alt="Refresh icon">
                         </button>
                         <button type="button" class="github">

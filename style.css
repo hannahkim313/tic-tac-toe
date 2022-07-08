@@ -5,8 +5,10 @@
     --main-grey: #f0f0f0;
     --hover-grey: #e0e0e0d1;
 
-    --box-shadow-thin: 1px 1px 3px #d4d4d4, -1px 1px 3px #dfdfdf;
-    --box-shadow-thick: 3px 3px 8px #3d685e4d, -3px 3px 8px #3d685e4d;
+    --box-shadow-thin-grey: 1px 1px 3px #d4d4d4, -1px 1px 3px #dfdfdf;
+    --box-shadow-med-grey: 3px 3px 5px #d4d4d4, -3px 3px 5px #dfdfdf;
+    --box-shadow-med-dark: 3px 3px 5px #58556353, -3px 3px 5px #58556353;
+    --box-shadow-thick-green: 3px 3px 8px #3d685e4d, -3px 3px 8px #3d685e4d;
 }
 
 body {
@@ -43,6 +45,22 @@ main {
 }
 
 /******************************************************************************/
+/* Selectors for the overlay start here.
+/******************************************************************************/
+
+.overlay {
+    width: 100%;
+    height: 100%;
+
+    background-color: var(--main-font-color);
+    opacity: 0.3;
+
+    position: fixed;
+
+    z-index: 0;
+}
+
+/******************************************************************************/
 /* Selectors for the home page start here.
 /******************************************************************************/
 
@@ -66,7 +84,7 @@ main {
     background-color: white;
     border: none;
     border-radius: 16px;
-    box-shadow: var(--box-shadow-thin);
+    box-shadow: var(--box-shadow-thin-grey);
 
     transition-duration: 0.4s;
 
@@ -110,7 +128,7 @@ main {
     background-color: white;
     border: none;
     border-radius: 16px;
-    box-shadow: var(--box-shadow-thin);
+    box-shadow: var(--box-shadow-thin-grey);
 
     transition-duration: 0.4s;
 
@@ -141,7 +159,7 @@ form {
     
     background-color: white;
     border-radius: 16px;
-    box-shadow: var(--box-shadow-thick);
+    box-shadow: var(--box-shadow-thick-green);
 
     display: flex;
     flex-direction: column;
@@ -158,7 +176,7 @@ form > button {
     background-color: white;
     border: none;
     border-radius: 16px;
-    box-shadow: var(--box-shadow-thin);
+    box-shadow: var(--box-shadow-thin-grey);
 
     transition-duration: 0.4s;
 }
@@ -279,7 +297,7 @@ input {
     background-color: white;
     border: none;
     border-radius: 8px;
-    box-shadow: var(--box-shadow-thin);
+    box-shadow: var(--box-shadow-thin-grey);
 }
 
 input:focus {
@@ -296,7 +314,7 @@ label {
 
     background-color: var(--light-cream);
     border-radius: 8px;
-    box-shadow: var(--box-shadow-thin);
+    box-shadow: var(--box-shadow-thin-grey);
 
     position: absolute;
     top: 0;
@@ -313,7 +331,7 @@ label {
 
     background-color: white;
     border-radius: 16px;
-    box-shadow: var(--box-shadow-thick);
+    box-shadow: var(--box-shadow-thick-green);
 
     display: flex;
     flex-direction: column;
@@ -416,28 +434,77 @@ label {
     background-color: #e0dcd4;
 }
 
+/* Selectors for the home popup start here. */
+
+.home-popup {
+    width: 250px;
+    height: 150px;
+
+    text-align: center;
+
+    margin: auto;
+
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: var(--box-shadow-med-dark);
+
+    position: fixed;
+    top: 30px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
+.home-popup .buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.home-popup .buttons button {
+    width: 48px;
+    
+    padding: 2px 4px;
+
+    background-color: var(--main-grey);
+    border: none;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow-thin-grey);
+}
+
+.home-popup .buttons button:hover {
+    background-color: var(--hover-grey);
+}
+
 /* Selectors for the buttons start here. */
 
-.buttons {
+.content > .buttons {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 16px;
 }
 
-.buttons button {
+.content > .buttons button {
     padding: 8px;
 
     background-color: var(--main-grey);
     border: none;
     border-radius: 50%;
-    box-shadow: var(--box-shadow-thin);
+    box-shadow: var(--box-shadow-thin-grey);
 }
 
-.buttons button:hover {
+.content > .buttons button:hover {
     background-color: var(--hover-grey);
 }
 
-.buttons img {
+.content > .buttons img {
     width: 1.3rem;
 }
