@@ -112,12 +112,18 @@ const playersPage = (() => {
     const playerTwoIcons = document.querySelectorAll(".players .player-two .img-container");
     const playerTwoLeftBtn = document.querySelector(".player-two .left");
     const playerTwoRightBtn = document.querySelector(".player-two .right");
+
+    const playerOneInput = document.querySelector(".player-one .name-settings input");
+    const playerTwoInput = document.querySelector(".player-two .name-settings input");
     
     const submitButton = document.querySelector(".submit");
 
     const gamePage = document.querySelector(".game-page");
     const playerOneGamePageIconContainer = document.querySelector(".game-page .player-one .img-container");
     const playerTwoGamePageIconContainer = document.querySelector(".game-page .player-two .img-container");
+
+    const playerOneFinalName = document.querySelector(".player-one .name");
+    const playerTwoFinalName = document.querySelector(".player-two .name");
 
     // Function declarations start here.
 
@@ -273,7 +279,7 @@ const playersPage = (() => {
             }
             playerTwoGamePageIconContainer.appendChild(img);
         }
-    }
+    };
 
     // Event listeners start here.
 
@@ -316,6 +322,14 @@ const playersPage = (() => {
         playerTwoIndex++;
         displayIcon(playerTwoIndex, "two");
         resetIndex("two");
+    });
+
+    playerOneInput.addEventListener("change", e => {
+        playerOneFinalName.textContent += playerOneInput.value;
+    });
+
+    playerTwoInput.addEventListener("change", e => {
+        playerTwoFinalName.textContent += playerTwoInput.value;
     });
 
     submitButton.addEventListener("click", e => {
