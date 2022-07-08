@@ -101,9 +101,9 @@ const playersPage = (() => {
     const whiteArrow = greenArrow.nextElementSibling;
     
     let playerOneIndex = 1;
-    let playerOneSelectedIcon;
+    let playerOneFinalIconIndex = "0";
     let playerTwoIndex = 1;
-    let playerTwoSelectedIcon;
+    let playerTwoFinalIconIndex = "0";
     
     const playerOneIcons = document.querySelectorAll(".players .player-one .img-container");
     const playerOneLeftBtn = document.querySelector(".player-one .left");
@@ -146,7 +146,7 @@ const playersPage = (() => {
                 if (index < 1) index = playerOneIcons.length;
                 if (icon === playerOneIcons[index - 1]) {
                     icon.style.display = "block";
-                    playerOneSelectedIcon = icon.firstElementChild;
+                    playerOneFinalIconIndex = icon.firstElementChild.getAttribute("data-index");
                 }
                 else icon.style.display = "none";
             }
@@ -157,7 +157,7 @@ const playersPage = (() => {
                 if (index < 1) index = playerTwoIcons.length;
                 if (icon === playerTwoIcons[index - 1]) {
                     icon.style.display = "block";
-                    playerTwoSelectedIcon = icon.firstElementChild;
+                    playerTwoFinalIconIndex = icon.firstElementChild.getAttribute("data-index");
                 }
                 else icon.style.display = "none";
             }
@@ -178,6 +178,102 @@ const playersPage = (() => {
             if (playerTwoIndex < 1) playerTwoIndex = playerTwoIcons.length;
         }
     };
+
+    /**
+     * Displays the players' selected icons on the game page.
+     * @param {String} player - Player number.
+     * @param {String} index - Index number of icon in list.
+     */
+    const displayFinalPlayerIcon = (player, index) => {
+        if (player === "one") {
+            const img = document.createElement("img");
+            if (index === "0") {
+                img.src = "img/cat.png";
+                img.alt = "Cat icon";
+            }
+            if (index === "1") {
+                img.src = "img/elephant.png";
+                img.alt = "Elephant icon";
+            }
+            if (index === "2") {
+                img.src = "img/koala.png";
+                img.alt = "Koala icon";
+            }
+            if (index === "3") {
+                img.src = "img/monkey.png";
+                img.alt = "Monkey icon";
+            }
+            if (index === "4") {
+                img.src = "img/owl.png";
+                img.alt = "Owl icon";
+            }
+            if (index === "5") {
+                img.src = "img/panda.png";
+                img.alt = "Panda icon";
+            }
+            if (index === "6") {
+                img.src = "img/rabbit.png";
+                img.alt = "Rabbit icon";
+            }
+            if (index === "7") {
+                img.src = "img/sheep.png";
+                img.alt = "Sheep icon";
+            }
+            if (index === "8") {
+                img.src = "img/snail.png";
+                img.alt = "Snail icon";
+            }
+            if (index === "9") {
+                img.src = "img/turtle.png";
+                img.alt = "Turtle icon";
+            }
+            playerOneGamePageIconContainer.appendChild(img);
+        }
+        if (player === "two") {
+            const img = document.createElement("img");
+            if (index === "0") {
+                img.src = "img/cat.png";
+                img.alt = "Cat icon";
+            }
+            if (index === "1") {
+                img.src = "img/elephant.png";
+                img.alt = "Elephant icon";
+            }
+            if (index === "2") {
+                img.src = "img/koala.png";
+                img.alt = "Koala icon";
+            }
+            if (index === "3") {
+                img.src = "img/monkey.png";
+                img.alt = "Monkey icon";
+            }
+            if (index === "4") {
+                img.src = "img/owl.png";
+                img.alt = "Owl icon";
+            }
+            if (index === "5") {
+                img.src = "img/panda.png";
+                img.alt = "Panda icon";
+            }
+            if (index === "6") {
+                img.src = "img/rabbit.png";
+                img.alt = "Rabbit icon";
+            }
+            if (index === "7") {
+                img.src = "img/sheep.png";
+                img.alt = "Sheep icon";
+            }
+            if (index === "8") {
+                img.src = "img/snail.png";
+                img.alt = "Snail icon";
+            }
+            if (index === "9") {
+                img.src = "img/turtle.png";
+                img.alt = "Turtle icon";
+            }
+            playerTwoGamePageIconContainer.appendChild(img);
+        }
+    }
 
     // Event listeners start here.
 
@@ -224,8 +320,8 @@ const playersPage = (() => {
 
     submitButton.addEventListener("click", e => {
         e.preventDefault();
-        playerOneGamePageIconContainer.appendChild(playerOneSelectedIcon);
-        playerTwoGamePageIconContainer.appendChild(playerTwoSelectedIcon);
+        displayFinalPlayerIcon("one", playerOneFinalIconIndex);
+        displayFinalPlayerIcon("two", playerTwoFinalIconIndex);
         helperFunctions.switchPageDisplay(playersPage, gamePage);
     });
 })();
