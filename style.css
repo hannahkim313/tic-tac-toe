@@ -370,18 +370,31 @@ label {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 32px;
+    gap: 48px;
 }
 
 /* Selectors for the players start here. */
 
 .game-play .player-one,
 .game-play .player-two {
+    padding: 16px;
+
+    background-color: var(--light-cream);
+    border-radius: 16px;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 24px;
+}
+
+.game-play .player-one .img-container,
+.game-play .player-two .img-container {
+    padding: 24px;
+
+    background-color: white;
+    border-radius: 50%;
 }
 
 .game-play .player-one img,
