@@ -369,6 +369,7 @@ const gamePage = (() => {
     const noButtonHome = document.querySelector(".home-popup .no");
 
     const refreshButton = document.querySelector(".refresh");
+
     const githubButton = document.querySelector(".github");
 
     // Event listeners start here.
@@ -386,5 +387,9 @@ const gamePage = (() => {
 
     noButtonHome.addEventListener("click", e => {
         helperFunctions.hideElements(homePopup, overlay);
-    })
+    });
+
+    githubButton.addEventListener("click", e => {
+        window.open("https://github.com/hannahkim313", "_blank");
+    });
 })();
