@@ -372,6 +372,12 @@ const gamePage = (() => {
 
     const githubButton = document.querySelector(".github");
 
+    // Factory function declarations start here.
+
+    const Player = () => {
+
+    };
+
     // Event listeners start here.
 
     window.addEventListener("pageshow", e => {
@@ -390,6 +396,6 @@ const gamePage = (() => {
     });
 
     githubButton.addEventListener("click", e => {
-        window.open("https://github.com/hannahkim313", "_blank");
+        window.open("https://github.com/hannahkim313/tic-tac-toe", "_blank");
     });
 })();
