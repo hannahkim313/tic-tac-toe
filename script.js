@@ -336,6 +336,8 @@ const playersPage = (() => {
         e.preventDefault();
         displayFinalPlayerIcon("one", playerOneFinalIconIndex);
         displayFinalPlayerIcon("two", playerTwoFinalIconIndex);
+        if (!playerOneFinalName.textContent) playerOneFinalName.textContent = "Player 1";
+        if (!playerTwoFinalName.textContent) playerTwoFinalName.textContent = "Player 2";
         helperFunctions.switchPageDisplay(playersPage, gamePage);
     });
 })();
