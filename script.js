@@ -316,12 +316,60 @@ const playersPage = (() => {
 const gamePage = (() => {
     const Player = (mark) => {
         const getMark = () => mark;
+
         const makeMove = (tile) => tile.textContent = getMark();
 
         return {
             makeMove
         }
     };
+
+    const gameBoard = (() => {
+        const getBoardValues = (board) => {
+            const tiles = [];
+            for (const tile of board) {
+                tiles.push(tile.textContent);
+            }
+            return tiles;
+        };
+
+        return {
+            getBoardValues
+        }
+    })();
+
+    const game = (() => {
+        const checkForPlayerOneWin = (boardValues) => {
+            return (
+                boardValues[0] === "X" && boardValues[1] === "X" && boardValues[2] === "X" ||
+                boardValues[0] === "X" && boardValues[4] === "X" && boardValues[8] === "X" ||
+                boardValues[0] === "X" && boardValues[3] === "X" && boardValues[6] === "X" ||
+                boardValues[1] === "X" && boardValues[4] === "X" && boardValues[7] === "X" ||
+                boardValues[2] === "X" && boardValues[4] === "X" && boardValues[6] === "X" ||
+                boardValues[2] === "X" && boardValues[5] === "X" && boardValues[8] === "X" ||
+                boardValues[3] === "X" && boardValues[4] === "X" && boardValues[5] === "X" ||
+                boardValues[6] === "X" && boardValues[7] === "X" && boardValues[8] === "X"
+            )
+        };
+
+        const checkForPlayerTwoWin = (boardValues) => {
+            return (
+                boardValues[0] === "O" && boardValues[1] === "O" && boardValues[2] === "O" ||
+                boardValues[0] === "O" && boardValues[4] === "O" && boardValues[8] === "O" ||
+                boardValues[0] === "O" && boardValues[3] === "O" && boardValues[6] === "O" ||
+                boardValues[1] === "O" && boardValues[4] === "O" && boardValues[7] === "O" ||
+                boardValues[2] === "O" && boardValues[4] === "O" && boardValues[6] === "O" ||
+                boardValues[2] === "O" && boardValues[5] === "O" && boardValues[8] === "O" ||
+                boardValues[3] === "O" && boardValues[4] === "O" && boardValues[5] === "O" ||
+                boardValues[6] === "O" && boardValues[7] === "O" && boardValues[8] === "O"
+            )
+        };
+
+        return {
+            checkForPlayerOneWin,
+            checkForPlayerTwoWin
+        }
+    })();
 
     let player = "one";
     const playerOne = Player("X");
@@ -340,10 +388,26 @@ const gamePage = (() => {
             if (tile.textContent === "X" || tile.textContent === "O") return;
             if (player === "one") {
                 playerOne.makeMove(tile);
+                const boardValues = gameBoard.getBoardValues(gameBoardTiles);
+                // if (game.checkForPlayerOneWin(boardValues));
+                // Change color of/animate winning play.
+                // Display pop up winning message?
+                // Increase player one score.
+                // Clear board on next click.
+                // Increase round number.
+                // Change active player border.
                 player = "two";
             }
             else if (player === "two") {
                 playerTwo.makeMove(tile);
+                const boardValues = gameBoard.getBoardValues(gameBoardTiles);
+                // if (game.checkForPlayerTwoWin(boardValues));
+                // Change color of/animate winning play.
+                // Display pop up winning message?
+                // Increase player two score.
+                // Clear board on click.
+                // Increase round number.
+                // Change active player border.
                 player = "one";
             }
         });
