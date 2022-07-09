@@ -308,6 +308,10 @@ const playersPage = (() => {
         const playersPage = document.querySelector(".players-page");
         const gamePage = document.querySelector(".game-page");
         helperFunctions.switchPageDisplay(playersPage, gamePage);
+        const playerOneGamePageIconContainer = document.querySelector(
+            ".game-page .player-one .img-container"
+        );
+        playerOneGamePageIconContainer.style.borderColor = "var(--pink)";
     });
 })();
 

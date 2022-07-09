@@ -2,6 +2,7 @@
     --main-font-color: #585563;
     --green: #5D9D8F;
     --light-cream: #F8F5F0;
+    --pink: #fdd4c6;
     --main-grey: #f0f0f0;
     --hover-grey: #e0e0e0d1;
 
@@ -394,6 +395,7 @@ label {
     padding: 24px;
 
     background-color: white;
+    border: 2px solid white;
     border-radius: 50%;
 }
 
@@ -409,7 +411,7 @@ label {
     
     padding: 4px 16px;
 
-    background-color: #fdd4c6;
+    background-color: var(--pink);
     border-radius: 16px;
 }
 
@@ -437,6 +439,8 @@ label {
 .space {
     width: 85px;
     height: 85px;
+
+    font-size: 1.3rem;
 
     background-color: #efebe3;
     border: none;
