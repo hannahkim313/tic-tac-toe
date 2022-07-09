@@ -1,25 +1,17 @@
 /******************************************************************************/
-/* Module declarations start here.
+/*
+/*   Sections:
+/* 
+/*   1. Helper functions
+/*   2. Home page
+/*   3. Players page
+/*   4. Game page
+/*
 /******************************************************************************/
-
-/**
- *   Sections:
- * 
- *   1. Helper functions
- *   1. Home page
- *   2. Players page
- *   3. Game page
- */
 
 // Helper function declarations start here. (1) //
 
 const helperFunctions = (() => {
-
-    /**
-     * Changes the image displayed on a button during a mouseover event.
-     * @param {Object} initialImg - Element object of initial image.
-     * @param {Object} newImg - Element object of new image.
-     */
     const changeOnMouseOver = (initialImg, newImg) => {
         setTimeout(() => {
             initialImg.style.display = "none";
@@ -27,11 +19,6 @@ const helperFunctions = (() => {
         }, 200);
     };
 
-    /**
-     * Changes the image displayed on a button during a mouseout event.
-     * @param {Object} initialImg - Element object of initial image.
-     * @param {Object} newImg - Element object of new image.
-     */
     const changeOnmouseOut = (initialImg, newImg) => {
         setTimeout(() => {
             initialImg.style.display = "initial";
@@ -39,20 +26,11 @@ const helperFunctions = (() => {
         }, 200);
     };
 
-    /**
-     * Changes page displayed on window.
-     * @param {Object} currentPage - Element object of current page.
-     * @param {Object} newPage - Element object of new page.
-     */
     const switchPageDisplay = (currentPage, newPage) => {
         currentPage.style.display = "none";
         newPage.style.display = "flex";
     };
 
-    /**
-     * Hides each element.
-     * @param  {...Object} args - Element object to hide.
-     */
     const hideElements = (...args) => {
         for (const element of args) {
             element.style.display = "none";
@@ -70,28 +48,22 @@ const helperFunctions = (() => {
 // Home page declarations start here. (2) //
 
 const homePage = (() => {
-
-    // Variable declarations start here.
-    
-    const homePage = document.querySelector(".home-page");
-
-    const playersPage = document.querySelector(".players-page");
-
     const playButton = document.querySelector(".play");
-    const greenIcon = playButton.firstElementChild;
-    const whiteIcon = greenIcon.nextElementSibling;
-
-    // Event listeners start here.
-
     playButton.addEventListener("mouseover", e => {
+        const greenIcon = playButton.firstElementChild;
+        const whiteIcon = greenIcon.nextElementSibling;
         helperFunctions.changeOnMouseOver(greenIcon, whiteIcon)
     });
 
     playButton.addEventListener("mouseout", e => {
+        const greenIcon = playButton.firstElementChild;
+        const whiteIcon = greenIcon.nextElementSibling;
         helperFunctions.changeOnmouseOut(greenIcon, whiteIcon);
     });
 
     playButton.addEventListener("click", e => {
+        const homePage = document.querySelector(".home-page");
+        const playersPage = document.querySelector(".players-page");
         helperFunctions.switchPageDisplay(homePage, playersPage);
     });
 })();
@@ -99,50 +71,17 @@ const homePage = (() => {
 // Players page declarations start here. (3) //
 
 const playersPage = (() => {
-
-    // Variable declarations start here.
-
-    const homePage = document.querySelector(".home-page");
-
-    const playersPage = document.querySelector(".players-page");
-    const playerIcons = document.querySelectorAll(".players-page .img-container");
-
-    const backButton = document.querySelector(".back");
-    const greenArrow = backButton.firstElementChild;
-    const whiteArrow = greenArrow.nextElementSibling;
-    
     let playerOneIndex = 1;
     let playerOneFinalIconIndex = "0";
     let playerTwoIndex = 1;
     let playerTwoFinalIconIndex = "0";
-    
-    const playerOneIcons = document.querySelectorAll(".players .player-one .img-container");
-    const playerOneLeftBtn = document.querySelector(".player-one .left");
-    const playerOneRightBtn = document.querySelector(".player-one .right");
-    
-    const playerTwoIcons = document.querySelectorAll(".players .player-two .img-container");
-    const playerTwoLeftBtn = document.querySelector(".player-two .left");
-    const playerTwoRightBtn = document.querySelector(".player-two .right");
-
-    const playerOneInput = document.querySelector(".player-one .name-settings input");
-    const playerTwoInput = document.querySelector(".player-two .name-settings input");
-    
-    const submitButton = document.querySelector(".submit");
-
-    const gamePage = document.querySelector(".game-page");
-    const playerOneGamePageIconContainer = document.querySelector(".game-page .player-one .img-container");
-    const playerTwoGamePageIconContainer = document.querySelector(".game-page .player-two .img-container");
-
     const playerOneFinalName = document.querySelector(".player-one .name");
     const playerTwoFinalName = document.querySelector(".player-two .name");
-
-    // Function declarations start here.
-
-    /**
-     * Displays the first player icon and hides the rest of the icons
-     * upon page load.
-     */
-     const loadIcons = () => {
+    
+    const loadIcons = () => {
+        const playerIcons = document.querySelectorAll(
+            ".players-page .img-container"
+        );
         for (const icon of playerIcons) {
             if (icon === playerIcons[0] || icon === playerIcons[10]) {
                 icon.style.display = "block";
@@ -151,12 +90,10 @@ const playersPage = (() => {
         }
     };
 
-    /**
-     * Displays the next or previous icon in list of icons.
-     * @param {Number} index - Index number of icon in list.
-     * @param {String} player - Player number.
-     */
-     const displayIcon = (index, player) => {
+    const displayIcon = (index, player) => {
+        const playerOneIcons = document.querySelectorAll(
+            ".players .player-one .img-container"
+        );
         if (player === "one") {
             for (const icon of playerOneIcons) {
                 if (index > playerOneIcons.length) index = 1;
@@ -169,6 +106,9 @@ const playersPage = (() => {
             }
         }
         if (player === "two") {
+            const playerTwoIcons = document.querySelectorAll(
+                ".players .player-two .img-container"
+            );
             for (const icon of playerTwoIcons) {
                 if (index > playerTwoIcons.length) index = 1;
                 if (index < 1) index = playerTwoIcons.length;
@@ -181,26 +121,23 @@ const playersPage = (() => {
         }
     };
 
-    /**
-     * Checks if index is out of range and, if it is, resets the value.
-     * @param {String} player - Player number.
-     */
     const resetIndex = (player) => {
         if (player === "one") {
+            const playerOneIcons = document.querySelectorAll(
+                ".players .player-one .img-container"
+            );
             if (playerOneIndex > playerOneIcons.length) playerOneIndex = 1;
             if (playerOneIndex < 1) playerOneIndex = playerOneIcons.length;
         }
         if (player === "two") {
+            const playerTwoIcons = document.querySelectorAll(
+                ".players .player-two .img-container"
+            );
             if (playerTwoIndex > playerTwoIcons.length) playerTwoIndex = 1;
             if (playerTwoIndex < 1) playerTwoIndex = playerTwoIcons.length;
         }
     };
 
-    /**
-     * Displays the players' selected icons on the game page.
-     * @param {String} player - Player number.
-     * @param {String} index - Index number of icon in list.
-     */
     const displayFinalPlayerIcon = (player, index) => {
         if (player === "one") {
             const img = document.createElement("img");
@@ -244,6 +181,9 @@ const playersPage = (() => {
                 img.src = "img/turtle.png";
                 img.alt = "Turtle icon";
             }
+            const playerOneGamePageIconContainer = document.querySelector(
+                ".game-page .player-one .img-container"
+            );
             playerOneGamePageIconContainer.appendChild(img);
         }
         if (player === "two") {
@@ -288,67 +228,85 @@ const playersPage = (() => {
                 img.src = "img/turtle.png";
                 img.alt = "Turtle icon";
             }
+            const playerTwoGamePageIconContainer = document.querySelector(
+                ".game-page .player-two .img-container"
+            );
             playerTwoGamePageIconContainer.appendChild(img);
         }
     };
 
-    // Event listeners start here.
-
     window.addEventListener("pageshow", e => {
+        const playersPage = document.querySelector(".players-page");
         helperFunctions.hideElements(playersPage);
         loadIcons();
     });
 
+    const backButton = document.querySelector(".back");
     backButton.addEventListener("mouseover", e => {
+        const greenArrow = backButton.firstElementChild;
+        const whiteArrow = greenArrow.nextElementSibling;
         helperFunctions.changeOnMouseOver(greenArrow, whiteArrow);
     });
-    
+
     backButton.addEventListener("mouseout", e => {
+        const greenArrow = backButton.firstElementChild;
+        const whiteArrow = greenArrow.nextElementSibling;
         helperFunctions.changeOnmouseOut(greenArrow, whiteArrow);
     });
 
     backButton.addEventListener("click", e => {
+        const playersPage = document.querySelector(".players-page");
+        const homePage = document.querySelector(".home-page");
         helperFunctions.switchPageDisplay(playersPage, homePage);
     });
     
+    const playerOneLeftBtn = document.querySelector(".player-one .left");
     playerOneLeftBtn.addEventListener("click", e => {
         playerOneIndex--;
         displayIcon(playerOneIndex, "one");
         resetIndex("one");
     });
 
+    const playerOneRightBtn = document.querySelector(".player-one .right");
     playerOneRightBtn.addEventListener("click", e => {
         playerOneIndex++;
         displayIcon(playerOneIndex, "one");
         resetIndex("one");
     });
 
+    const playerTwoLeftBtn = document.querySelector(".player-two .left");
     playerTwoLeftBtn.addEventListener("click", e => {
         playerTwoIndex--;
         displayIcon(playerTwoIndex, "two");
         resetIndex("two");
     });
-
+    
+    const playerTwoRightBtn = document.querySelector(".player-two .right");
     playerTwoRightBtn.addEventListener("click", e => {
         playerTwoIndex++;
         displayIcon(playerTwoIndex, "two");
         resetIndex("two");
     });
 
+    const playerOneInput = document.querySelector(".player-one .name-settings input");
     playerOneInput.addEventListener("change", e => {
         playerOneFinalName.textContent += playerOneInput.value;
     });
 
+    const playerTwoInput = document.querySelector(".player-two .name-settings input");
     playerTwoInput.addEventListener("change", e => {
         playerTwoFinalName.textContent += playerTwoInput.value;
     });
 
+    const submitButton = document.querySelector(".submit");
     submitButton.addEventListener("click", e => {
         e.preventDefault();
         displayFinalPlayerIcon("one", playerOneFinalIconIndex);
         displayFinalPlayerIcon("two", playerTwoFinalIconIndex);
         if (!playerOneFinalName.textContent) playerOneFinalName.textContent = "Player 1";
         if (!playerTwoFinalName.textContent) playerTwoFinalName.textContent = "Player 2";
+        const playersPage = document.querySelector(".players-page");
+        const gamePage = document.querySelector(".game-page");
         helperFunctions.switchPageDisplay(playersPage, gamePage);
     });
 })();
@@ -356,45 +314,60 @@ const playersPage = (() => {
 // Game page declarations start here. (4) //
 
 const gamePage = (() => {
+    const Player = (mark) => {
+        const getMark = () => mark;
+        const makeMove = (tile) => tile.textContent = getMark();
 
-    // Variable declarations start here.
-
-    const overlay = document.querySelector(".overlay");
-
-    const gamePage = document.querySelector(".game-page");
-
-    const homeButton = document.querySelector(".home");
-    const homePopup = document.querySelector(".home-popup");
-    const yesButtonHome = document.querySelector(".home-popup .yes");
-    const noButtonHome = document.querySelector(".home-popup .no");
-
-    const refreshButton = document.querySelector(".refresh");
-
-    const githubButton = document.querySelector(".github");
-
-    // Factory function declarations start here.
-
-    const Player = () => {
-
+        return {
+            makeMove
+        }
     };
 
-    // Event listeners start here.
-
+    let player = "one";
+    const playerOne = Player("X");
+    const playerTwo = Player("O");
+    
     window.addEventListener("pageshow", e => {
+        const gamePage = document.querySelector(".game-page");
+        const homePopup = document.querySelector(".home-popup");
+        const overlay = document.querySelector(".overlay");
         helperFunctions.hideElements(gamePage, homePopup, overlay);
     });
+    
+    const gameBoardTiles = document.querySelectorAll(".game-board button");
+    for (const tile of gameBoardTiles) {
+        tile.addEventListener("click", e => {
+            if (tile.textContent === "X" || tile.textContent === "O") return;
+            if (player === "one") {
+                playerOne.makeMove(tile);
+                player = "two";
+            }
+            else if (player === "two") {
+                playerTwo.makeMove(tile);
+                player = "one";
+            }
+        });
+    }
 
+    const homeButton = document.querySelector(".home");
     homeButton.addEventListener("click", e => {
+        const homePopup = document.querySelector(".home-popup");
+        const overlay = document.querySelector(".overlay");
         homePopup.style.display = "flex";
         overlay.style.display = "initial";
     });
 
+    const yesButtonHome = document.querySelector(".home-popup .yes");
     yesButtonHome.addEventListener("click", e => location.reload());
 
+    const noButtonHome = document.querySelector(".home-popup .no");
     noButtonHome.addEventListener("click", e => {
+        const homePopup = document.querySelector(".home-popup");
+        const overlay = document.querySelector(".overlay");
         helperFunctions.hideElements(homePopup, overlay);
     });
 
+    const githubButton = document.querySelector(".github");
     githubButton.addEventListener("click", e => {
         window.open("https://github.com/hannahkim313/tic-tac-toe", "_blank");
     });
