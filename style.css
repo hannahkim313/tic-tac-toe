@@ -445,6 +445,8 @@ label {
     background-color: #efebe3;
     border: none;
     border-radius: 8px;
+
+    transition: font-size 1.3s ease-out;
 }
 
 .space:hover {
