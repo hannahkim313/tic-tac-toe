@@ -31,8 +31,8 @@ const helperFunctions = (() => {
         newPage.style.display = "flex";
     };
 
-    const hideElements = (...args) => {
-        for (const element of args) {
+    const hideElements = (...elements) => {
+        for (const element of elements) {
             element.style.display = "none";
         }
     };
@@ -329,43 +329,89 @@ const gamePage = (() => {
     };
 
     const gameBoard = (() => {
-        const getBoardValues = (board) => {
-            const tiles = [];
+        const getTileValues = (board) => {
+            const tileValues = [];
             for (const tile of board) {
-                tiles.push(tile.textContent);
+                tileValues.push(tile.textContent);
             }
-            return tiles;
+            return tileValues;
+        };
+
+        const changeMarkColor = (tiles, winningTileValues) => {
+            let i = 0;
+            for (const tile of tiles) {
+                if (tile.getAttribute("data-index") == winningTileValues[i]) {
+                    tile.style.color = "var(--green)";
+                    i++;
+                }
+            }
+        };
+
+        const displayWinningValues = (tiles, tileValues) => {
+            if (tileValues[0] === "X" && tileValues[1] === "X" && tileValues[2] === "X" ||
+                tileValues[0] === "O" && tileValues[1] === "O" && tileValues[2] === "O") {
+                    changeMarkColor(tiles, [0, 1, 2]);
+            }
+            if (tileValues[0] === "X" && tileValues[4] === "X" && tileValues[8] === "X" ||
+                tileValues[0] === "O" && tileValues[4] === "O" && tileValues[8] === "O") {
+                    changeMarkColor(tiles, [0, 4, 8]);
+            }
+            if (tileValues[0] === "X" && tileValues[3] === "X" && tileValues[6] === "X" ||
+                tileValues[0] === "O" && tileValues[3] === "O" && tileValues[6] === "O") {
+                    changeMarkColor(tiles, [0, 3, 6]);
+            }
+            if (tileValues[1] === "X" && tileValues[4] === "X" && tileValues[7] === "X" ||
+                tileValues[1] === "O" && tileValues[4] === "O" && tileValues[7] === "O") {
+                    changeMarkColor(tiles, [1, 4, 7]);
+            }
+            if (tileValues[2] === "X" && tileValues[4] === "X" && tileValues[6] === "X" ||
+                tileValues[2] === "O" && tileValues[4] === "O" && tileValues[6] === "O") {
+                    changeMarkColor(tiles, [2, 4, 6]);
+            }
+            if (tileValues[2] === "X" && tileValues[5] === "X" && tileValues[8] === "X" ||
+                tileValues[2] === "O" && tileValues[5] === "O" && tileValues[8] === "O") {
+                    changeMarkColor(tiles, [2, 5, 8]);
+            }
+            if (tileValues[3] === "X" && tileValues[4] === "X" && tileValues[5] === "X" ||
+                tileValues[3] === "O" && tileValues[4] === "O" && tileValues[5] === "O") {
+                    changeMarkColor(tiles, [3, 4, 5]);
+            }
+            if (tileValues[6] === "X" && tileValues[7] === "X" && tileValues[8] === "X" ||
+                tileValues[6] === "O" && tileValues[7] === "O" && tileValues[8] === "O") {
+                    changeMarkColor(tiles, [6, 7, 8]);
+            }
         };
 
         return {
-            getBoardValues
+            getTileValues,
+            displayWinningValues
         }
     })();
 
     const game = (() => {
-        const checkForPlayerOneWin = (boardValues) => {
+        const checkForPlayerOneWin = (tileValues) => {
             return (
-                boardValues[0] === "X" && boardValues[1] === "X" && boardValues[2] === "X" ||
-                boardValues[0] === "X" && boardValues[4] === "X" && boardValues[8] === "X" ||
-                boardValues[0] === "X" && boardValues[3] === "X" && boardValues[6] === "X" ||
-                boardValues[1] === "X" && boardValues[4] === "X" && boardValues[7] === "X" ||
-                boardValues[2] === "X" && boardValues[4] === "X" && boardValues[6] === "X" ||
-                boardValues[2] === "X" && boardValues[5] === "X" && boardValues[8] === "X" ||
-                boardValues[3] === "X" && boardValues[4] === "X" && boardValues[5] === "X" ||
-                boardValues[6] === "X" && boardValues[7] === "X" && boardValues[8] === "X"
+                tileValues[0] === "X" && tileValues[1] === "X" && tileValues[2] === "X" ||
+                tileValues[0] === "X" && tileValues[4] === "X" && tileValues[8] === "X" ||
+                tileValues[0] === "X" && tileValues[3] === "X" && tileValues[6] === "X" ||
+                tileValues[1] === "X" && tileValues[4] === "X" && tileValues[7] === "X" ||
+                tileValues[2] === "X" && tileValues[4] === "X" && tileValues[6] === "X" ||
+                tileValues[2] === "X" && tileValues[5] === "X" && tileValues[8] === "X" ||
+                tileValues[3] === "X" && tileValues[4] === "X" && tileValues[5] === "X" ||
+                tileValues[6] === "X" && tileValues[7] === "X" && tileValues[8] === "X"
             )
         };
 
-        const checkForPlayerTwoWin = (boardValues) => {
+        const checkForPlayerTwoWin = (tileValues) => {
             return (
-                boardValues[0] === "O" && boardValues[1] === "O" && boardValues[2] === "O" ||
-                boardValues[0] === "O" && boardValues[4] === "O" && boardValues[8] === "O" ||
-                boardValues[0] === "O" && boardValues[3] === "O" && boardValues[6] === "O" ||
-                boardValues[1] === "O" && boardValues[4] === "O" && boardValues[7] === "O" ||
-                boardValues[2] === "O" && boardValues[4] === "O" && boardValues[6] === "O" ||
-                boardValues[2] === "O" && boardValues[5] === "O" && boardValues[8] === "O" ||
-                boardValues[3] === "O" && boardValues[4] === "O" && boardValues[5] === "O" ||
-                boardValues[6] === "O" && boardValues[7] === "O" && boardValues[8] === "O"
+                tileValues[0] === "O" && tileValues[1] === "O" && tileValues[2] === "O" ||
+                tileValues[0] === "O" && tileValues[4] === "O" && tileValues[8] === "O" ||
+                tileValues[0] === "O" && tileValues[3] === "O" && tileValues[6] === "O" ||
+                tileValues[1] === "O" && tileValues[4] === "O" && tileValues[7] === "O" ||
+                tileValues[2] === "O" && tileValues[4] === "O" && tileValues[6] === "O" ||
+                tileValues[2] === "O" && tileValues[5] === "O" && tileValues[8] === "O" ||
+                tileValues[3] === "O" && tileValues[4] === "O" && tileValues[5] === "O" ||
+                tileValues[6] === "O" && tileValues[7] === "O" && tileValues[8] === "O"
             )
         };
 
@@ -392,8 +438,10 @@ const gamePage = (() => {
             if (tile.textContent === "X" || tile.textContent === "O") return;
             if (player === "one") {
                 playerOne.makeMove(tile);
-                const boardValues = gameBoard.getBoardValues(gameBoardTiles);
-                // if (game.checkForPlayerOneWin(boardValues));
+                const tileValues = gameBoard.getTileValues(gameBoardTiles);
+                if (game.checkForPlayerOneWin(tileValues)) {
+                    gameBoard.displayWinningValues(gameBoardTiles, tileValues);
+                };
                 // Change color of/animate winning play.
                 // Display pop up winning message?
                 // Increase player one score.
@@ -404,8 +452,8 @@ const gamePage = (() => {
             }
             else if (player === "two") {
                 playerTwo.makeMove(tile);
-                const boardValues = gameBoard.getBoardValues(gameBoardTiles);
-                // if (game.checkForPlayerTwoWin(boardValues));
+                const tileValues = gameBoard.getTileValues(gameBoardTiles);
+                // if (game.checkForPlayerTwoWin(tileValues));
                 // Change color of/animate winning play.
                 // Display pop up winning message?
                 // Increase player two score.
