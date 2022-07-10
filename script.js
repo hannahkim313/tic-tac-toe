@@ -181,6 +181,7 @@ const playersPage = (() => {
                 img.src = "img/turtle.png";
                 img.alt = "Turtle icon";
             }
+
             const playerOneGamePageIconContainer = document.querySelector(
                 ".game-page .player-one .img-container"
             );
@@ -228,6 +229,7 @@ const playersPage = (() => {
                 img.src = "img/turtle.png";
                 img.alt = "Turtle icon";
             }
+
             const playerTwoGamePageIconContainer = document.querySelector(
                 ".game-page .player-two .img-container"
             );
@@ -358,43 +360,44 @@ const gamePage = (() => {
     const game = (() => {
         const checkForPlayerOneWin = (tileValues) => {
             return (
-                tileValues[0] === "X" && tileValues[1] === "X" && tileValues[2] === "X" ||
-                tileValues[0] === "X" && tileValues[4] === "X" && tileValues[8] === "X" ||
-                tileValues[0] === "X" && tileValues[3] === "X" && tileValues[6] === "X" ||
-                tileValues[1] === "X" && tileValues[4] === "X" && tileValues[7] === "X" ||
-                tileValues[2] === "X" && tileValues[4] === "X" && tileValues[6] === "X" ||
-                tileValues[2] === "X" && tileValues[5] === "X" && tileValues[8] === "X" ||
-                tileValues[3] === "X" && tileValues[4] === "X" && tileValues[5] === "X" ||
-                tileValues[6] === "X" && tileValues[7] === "X" && tileValues[8] === "X"
+                tileValues[0] === "X" && tileValues[1] === "X" && tileValues[2] === "X"
+                || tileValues[0] === "X" && tileValues[4] === "X" && tileValues[8] === "X"
+                || tileValues[0] === "X" && tileValues[3] === "X" && tileValues[6] === "X"
+                || tileValues[1] === "X" && tileValues[4] === "X" && tileValues[7] === "X"
+                || tileValues[2] === "X" && tileValues[4] === "X" && tileValues[6] === "X"
+                || tileValues[2] === "X" && tileValues[5] === "X" && tileValues[8] === "X"
+                || tileValues[3] === "X" && tileValues[4] === "X" && tileValues[5] === "X"
+                || tileValues[6] === "X" && tileValues[7] === "X" && tileValues[8] === "X"
             )
         };
 
         const checkForPlayerTwoWin = (tileValues) => {
             return (
-                tileValues[0] === "O" && tileValues[1] === "O" && tileValues[2] === "O" ||
-                tileValues[0] === "O" && tileValues[4] === "O" && tileValues[8] === "O" ||
-                tileValues[0] === "O" && tileValues[3] === "O" && tileValues[6] === "O" ||
-                tileValues[1] === "O" && tileValues[4] === "O" && tileValues[7] === "O" ||
-                tileValues[2] === "O" && tileValues[4] === "O" && tileValues[6] === "O" ||
-                tileValues[2] === "O" && tileValues[5] === "O" && tileValues[8] === "O" ||
-                tileValues[3] === "O" && tileValues[4] === "O" && tileValues[5] === "O" ||
-                tileValues[6] === "O" && tileValues[7] === "O" && tileValues[8] === "O"
+                tileValues[0] === "O" && tileValues[1] === "O" && tileValues[2] === "O"
+                || tileValues[0] === "O" && tileValues[4] === "O" && tileValues[8] === "O"
+                || tileValues[0] === "O" && tileValues[3] === "O" && tileValues[6] === "O"
+                || tileValues[1] === "O" && tileValues[4] === "O" && tileValues[7] === "O"
+                || tileValues[2] === "O" && tileValues[4] === "O" && tileValues[6] === "O"
+                || tileValues[2] === "O" && tileValues[5] === "O" && tileValues[8] === "O"
+                || tileValues[3] === "O" && tileValues[4] === "O" && tileValues[5] === "O"
+                || tileValues[6] === "O" && tileValues[7] === "O" && tileValues[8] === "O"
             )
         };
 
         const displayWinnerPopup = (player, tiles) => {
+            if (player === "one") {
+                const name = document.querySelector(".player-one .name");
+                const winner = document.querySelector(".winner");
+                winner.textContent = `${name.textContent} wins!`;
+            }
+            if (player === "two") {
+                const name = document.querySelector(".player-two .name");
+                const winner = document.querySelector(".winner");
+                winner.textContent = `${name.textContent} wins!`;
+            }
+
+            const popup = document.querySelector(".winner-popup");
             for (const tile of tiles) {
-                if (player === "one") {
-                    const name = document.querySelector(".player-one .name");
-                    const winner = document.querySelector(".winner");
-                    winner.textContent = `${name.textContent} wins!`;
-                }
-                if (player === "two") {
-                    const name = document.querySelector(".player-two .name");
-                    const winner = document.querySelector(".winner");
-                    winner.textContent = `${name.textContent} wins!`;
-                }
-                const popup = document.querySelector(".winner-popup");
                 tile.addEventListener("transitionend", e => {
                     setTimeout(() => {
                         popup.style.display = "flex";
@@ -404,39 +407,61 @@ const gamePage = (() => {
         };
 
         const displayWin = (player, tiles, tileValues) => {
-            if (tileValues[0] === "X" && tileValues[1] === "X" && tileValues[2] === "X" ||
-                tileValues[0] === "O" && tileValues[1] === "O" && tileValues[2] === "O") {
-                    gameBoard.transformMark(tiles, [0, 1, 2]);
+            if (
+                tileValues[0] === "X" && tileValues[1] === "X" && tileValues[2] === "X"
+                || tileValues[0] === "O" && tileValues[1] === "O" && tileValues[2] === "O"
+            ) {
+                gameBoard.transformMark(tiles, [0, 1, 2]);
             }
-            if (tileValues[0] === "X" && tileValues[4] === "X" && tileValues[8] === "X" ||
-                tileValues[0] === "O" && tileValues[4] === "O" && tileValues[8] === "O") {
-                    gameBoard.transformMark(tiles, [0, 4, 8]);
+            if (
+                tileValues[0] === "X" && tileValues[4] === "X" && tileValues[8] === "X"
+                || tileValues[0] === "O" && tileValues[4] === "O" && tileValues[8] === "O"
+            ) {
+                gameBoard.transformMark(tiles, [0, 4, 8]);
             }
-            if (tileValues[0] === "X" && tileValues[3] === "X" && tileValues[6] === "X" ||
-                tileValues[0] === "O" && tileValues[3] === "O" && tileValues[6] === "O") {
-                    gameBoard.transformMark(tiles, [0, 3, 6]);
+            if (
+                tileValues[0] === "X" && tileValues[3] === "X" && tileValues[6] === "X"
+                || tileValues[0] === "O" && tileValues[3] === "O" && tileValues[6] === "O"
+            ) {
+                gameBoard.transformMark(tiles, [0, 3, 6]);
             }
-            if (tileValues[1] === "X" && tileValues[4] === "X" && tileValues[7] === "X" ||
-                tileValues[1] === "O" && tileValues[4] === "O" && tileValues[7] === "O") {
-                    gameBoard.transformMark(tiles, [1, 4, 7]);
+            if (
+                tileValues[1] === "X" && tileValues[4] === "X" && tileValues[7] === "X"
+                || tileValues[1] === "O" && tileValues[4] === "O" && tileValues[7] === "O"
+            ) {
+                gameBoard.transformMark(tiles, [1, 4, 7]);
             }
-            if (tileValues[2] === "X" && tileValues[4] === "X" && tileValues[6] === "X" ||
-                tileValues[2] === "O" && tileValues[4] === "O" && tileValues[6] === "O") {
-                    gameBoard.transformMark(tiles, [2, 4, 6]);
+            if (
+                tileValues[2] === "X" && tileValues[4] === "X" && tileValues[6] === "X"
+                || tileValues[2] === "O" && tileValues[4] === "O" && tileValues[6] === "O"
+            ) {
+                gameBoard.transformMark(tiles, [2, 4, 6]);
             }
-            if (tileValues[2] === "X" && tileValues[5] === "X" && tileValues[8] === "X" ||
-                tileValues[2] === "O" && tileValues[5] === "O" && tileValues[8] === "O") {
-                    gameBoard.transformMark(tiles, [2, 5, 8]);
+            if (
+                tileValues[2] === "X" && tileValues[5] === "X" && tileValues[8] === "X"
+                || tileValues[2] === "O" && tileValues[5] === "O" && tileValues[8] === "O"
+            ) {
+                gameBoard.transformMark(tiles, [2, 5, 8]);
             }
-            if (tileValues[3] === "X" && tileValues[4] === "X" && tileValues[5] === "X" ||
-                tileValues[3] === "O" && tileValues[4] === "O" && tileValues[5] === "O") {
-                    gameBoard.transformMark(tiles, [3, 4, 5]);
+            if (
+                tileValues[3] === "X" && tileValues[4] === "X" && tileValues[5] === "X"
+                || tileValues[3] === "O" && tileValues[4] === "O" && tileValues[5] === "O"
+            ) {
+                gameBoard.transformMark(tiles, [3, 4, 5]);
             }
-            if (tileValues[6] === "X" && tileValues[7] === "X" && tileValues[8] === "X" ||
-                tileValues[6] === "O" && tileValues[7] === "O" && tileValues[8] === "O") {
-                    gameBoard.transformMark(tiles, [6, 7, 8]);
+            if (
+                tileValues[6] === "X" && tileValues[7] === "X" && tileValues[8] === "X"
+                || tileValues[6] === "O" && tileValues[7] === "O" && tileValues[8] === "O"
+            ) {
+                gameBoard.transformMark(tiles, [6, 7, 8]);
             }
+
             displayWinnerPopup(player, tiles);
+
+            window.addEventListener("click", e => {
+                const popup = document.querySelector(".winner-popup");
+                helperFunctions.hideElements(popup);
+            });
         };
 
         const increaseScore = (player) => {
@@ -473,7 +498,16 @@ const gamePage = (() => {
     const gameBoardTiles = document.querySelectorAll(".game-board button");
     for (const tile of gameBoardTiles) {
         tile.addEventListener("click", e => {
-            if (tile.textContent === "X" || tile.textContent === "O") return;
+            const winnerPopup = document.querySelector(".winner-popup");
+            const winnerPopupProps = window.getComputedStyle(winnerPopup);
+            if (
+                winnerPopupProps.getPropertyValue("display") === "flex"
+                || tile.textContent === "X"
+                || tile.textContent === "O"
+            ) {
+                return;
+            }
+            
             if (player === "one") {
                 playerOne.makeMove(tile);
                 const tileValues = gameBoard.getTileValues(gameBoardTiles);
