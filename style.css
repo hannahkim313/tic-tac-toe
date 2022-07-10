@@ -453,6 +453,33 @@ label {
     background-color: #e0dcd4;
 }
 
+/* Selectors for the round over popup start here. */
+
+.winner-popup {
+    width: 250px;
+    height: 150px;
+
+    text-align: center;
+
+    margin: auto;
+
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: var(--box-shadow-med-dark);
+
+    position: fixed;
+    top: 30px;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+}
+
 /* Selectors for the home popup start here. */
 
 .home-popup {
