@@ -341,15 +341,18 @@ const gamePage = (() => {
         };
 
         const transformMark = (tiles, winningTileValues) => {
-            // Change marker color to default afterwards
-            // Disable game board while transition is happening
-            // Then re-enable
             let i = 0;
             for (const tile of tiles) {
                 if (tile.getAttribute("data-index") == winningTileValues[i]) {
                     tile.style.fontSize = "2.5rem";
                     tile.style.color = "var(--green)";
-                    tile.addEventListener("transitionend", e => tile.style.fontSize = "1.3rem");
+                    for (const tile of tiles) {
+                        tile.disabled = true;
+                    }
+                    tile.addEventListener("transitionend", e => {
+                        tile.style.fontSize = "1.3rem";
+                        tile.style.color = "var(--main-font-color)";
+                    });
                     i++;
                 }
             }
@@ -483,6 +486,7 @@ const gamePage = (() => {
         };
 
         const changeRoundNum = () => {
+            // Fix if rounds hit double digits
             const round = document.querySelector(".heading p");
             const num = round.textContent.charAt(round.textContent.length - 1);
             round.textContent = `Round ${parseInt(num) + 1}`;
@@ -569,13 +573,17 @@ const gamePage = (() => {
         gameBoard.clearBoard();
         game.changeRoundNum();
         game.makePlayerActive(player);
+        const tiles = document.querySelectorAll(".row button");
+        for (const tile of tiles) {
+            tile.disabled = false;
+        }
     });
 
     const homeButton = document.querySelector(".home");
     homeButton.addEventListener("click", e => {
         const homePopup = document.querySelector(".home-popup");
-        const overlay = document.querySelector(".overlay");
         homePopup.style.display = "flex";
+        const overlay = document.querySelector(".overlay");
         overlay.style.display = "initial";
     });
 
