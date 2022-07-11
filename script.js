@@ -405,13 +405,16 @@ const gamePage = (() => {
             }
 
             const popup = document.querySelector(".winner-popup");
-            for (const tile of tiles) {
-                tile.addEventListener("transitionend", e => {
-                    setTimeout(() => {
-                        popup.style.display = "flex";
-                    }, 1300);
-                });
-            }
+            setTimeout(() => {
+                popup.style.display = "flex";
+            }, 2600);
+            // for (const tile of tiles) {
+            //     tile.addEventListener("transitionend", e => {
+            //         setTimeout(() => {
+            //             popup.style.display = "flex";
+            //         }, 1300);
+            //     });
+            // }
         };
 
         const displayWin = (player, tiles, tileValues) => {
@@ -478,18 +481,27 @@ const gamePage = (() => {
             }
         };
 
-        const playNextRound = () => {
-            // window.addEventListener("click", e => {
-            //     const popup = document.querySelector(".winner-popup");
-            //     helperFunctions.hideElements(popup);
-            //     gameBoard.clearBoard();
-            // });
-            const continueButton = document.querySelector(".continue");
-            continueButton.addEventListener("click", e => {
-                const winnerPopup = document.querySelector(".winner-popup");
-                helperFunctions.hideElements(winnerPopup);
-                gameBoard.clearBoard();
-            });
+        const changeRoundNum = () => {
+            const round = document.querySelector(".heading p");
+            const num = round.textContent.charAt(round.textContent.length - 1);
+            round.textContent = `Round ${parseInt(num) + 1}`;
+        };
+
+        const makePlayerActive = (player) => {
+            const playerOne = document.querySelector(
+                ".game-play .player-one .img-container"
+            );
+            const playerTwo = document.querySelector(
+                ".game-play .player-two .img-container"
+            );
+            if (player === "one") {
+                playerOne.style.borderColor = "var(--pink)";
+                playerTwo.style.borderColor = "white";
+            }
+            if (player === "two") {
+                playerOne.style.borderColor = "white";
+                playerTwo.style.borderColor = "var(--pink)";
+            }
         };
 
         return {
@@ -497,7 +509,8 @@ const gamePage = (() => {
             checkForPlayerTwoWin,
             displayWin,
             increaseScore,
-            playNextRound
+            changeRoundNum,
+            makePlayerActive
         }
     })();
 
@@ -532,14 +545,7 @@ const gamePage = (() => {
                 if (game.checkForPlayerOneWin(tileValues)) {
                     game.displayWin(player, gameBoardTiles, tileValues);
                     game.increaseScore(player);
-                    game.playNextRound();
-                };
-                // Change color of/animate winning play.
-                // Display pop up winning message?
-                // Increase player one score.
-                // Clear board on next click.
-                // Increase round number.
-                // Change active player border.
+                }
                 player = "two";
             }
             else if (player === "two") {
@@ -548,18 +554,20 @@ const gamePage = (() => {
                 if (game.checkForPlayerTwoWin(tileValues)) {
                     game.displayWin(player, gameBoardTiles, tileValues);
                     game.increaseScore(player);
-                    game.playNextRound();
-                };
-                // Change color of/animate winning play.
-                // Display pop up winning message?
-                // Increase player two score.
-                // Clear board on click.
-                // Increase round number.
-                // Change active player border.
+                }
                 player = "one";
             }
         });
     }
+
+    const continueButton = document.querySelector(".continue");
+    continueButton.addEventListener("click", e => {
+        const winnerPopup = document.querySelector(".winner-popup");
+        helperFunctions.hideElements(winnerPopup);
+        gameBoard.clearBoard();
+        game.changeRoundNum();
+        game.makePlayerActive(player);
+    });
 
     const homeButton = document.querySelector(".home");
     homeButton.addEventListener("click", e => {
