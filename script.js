@@ -340,6 +340,8 @@ const gamePage = (() => {
             return tileValues;
         };
 
+        const isTileFilled = (tileValue) => tileValue === "X" || tileValue === "O";
+
         const transformMark = (tiles, winningTileValues) => {
             let i = 0;
             for (const tile of tiles) {
@@ -364,6 +366,7 @@ const gamePage = (() => {
 
         return {
             getTileValues,
+            isTileFilled,
             transformMark,
             clearBoard
         }
@@ -396,6 +399,11 @@ const gamePage = (() => {
                 || tileValues[6] === "O" && tileValues[7] === "O" && tileValues[8] === "O"
             )
         }
+        };
+
+        const checkForTie = () => {
+            const tileValues = gameBoard.getTileValues();
+            return tileValues.every(gameBoard.isTileFilled);
         };
 
         const displayWinnerPopup = (player) => {
@@ -507,6 +515,7 @@ const gamePage = (() => {
 
         return {
             checkForWin,
+            checkForTie,
             displayWin,
             increaseScore,
             changeRoundNum,
@@ -521,9 +530,10 @@ const gamePage = (() => {
     window.addEventListener("pageshow", e => {
         const gamePage = document.querySelector(".game-page");
         const homePopup = document.querySelector(".home-popup");
-        const roundOverPopup = document.querySelector(".winner-popup");
+        const winnerPopup = document.querySelector(".winner-popup");
+        const tiePopup = document.querySelector(".tie-popup");
         const overlay = document.querySelector(".overlay");
-        helperFunctions.hideElements(gamePage, homePopup, roundOverPopup, overlay);
+        helperFunctions.hideElements(gamePage, homePopup, winnerPopup, tiePopup, overlay);
     });
     
     const tiles = document.querySelectorAll(".row button");
@@ -547,8 +557,11 @@ const gamePage = (() => {
                     game.makePlayerActive(player);
                     player = "two";
                 }
-                // if (game is a tie)
-                // do stuff here
+                else if (game.checkForTie()) {
+                    const tiePopup = document.querySelector(".tie-popup");
+                    tiePopup.style.display = "flex";
+                    player = "two";
+                }
                 else {
                     player = "two";
                     game.makePlayerActive(player);
@@ -562,8 +575,11 @@ const gamePage = (() => {
                     game.makePlayerActive(player);
                     player = "one";
                 }
-                // if (game is a tie)
-                // do stuff here
+                else if (game.checkForTie()) {
+                    const tiePopup = document.querySelector(".tie-popup");
+                    tiePopup.style.display = "flex";
+                    player = "one";
+                }
                 else {
                     player = "one";
                     game.makePlayerActive(player);
@@ -572,10 +588,24 @@ const gamePage = (() => {
         });
     }
 
-    const continueButton = document.querySelector(".continue");
-    continueButton.addEventListener("click", e => {
+    const winnerContinueButton = document.querySelector(".winner-popup .continue");
+    winnerContinueButton.addEventListener("click", e => {
         const winnerPopup = document.querySelector(".winner-popup");
         helperFunctions.hideElements(winnerPopup);
+        gameBoard.clearBoard();
+        game.changeRoundNum();
+        game.makePlayerActive(player);
+        const tiles = document.querySelectorAll(".row button");
+        for (const tile of tiles) {
+            tile.disabled = false;
+            tile.style.color = "var(--main-font-color)";
+        }
+    });
+
+    const tieContinueButton = document.querySelector(".tie-popup .continue");
+    tieContinueButton.addEventListener("click", e => {
+        const tiePopup = document.querySelector(".tie-popup");
+        helperFunctions.hideElements(tiePopup);
         gameBoard.clearBoard();
         game.changeRoundNum();
         game.makePlayerActive(player);
