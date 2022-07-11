@@ -331,15 +331,19 @@ const gamePage = (() => {
     };
 
     const gameBoard = (() => {
-        const getTileValues = (board) => {
+        const getTileValues = () => {
+            const tiles = document.querySelectorAll(".row button");
             const tileValues = [];
-            for (const tile of board) {
+            for (const tile of tiles) {
                 tileValues.push(tile.textContent);
             }
             return tileValues;
         };
 
         const transformMark = (tiles, winningTileValues) => {
+            // Change marker color to default afterwards
+            // Disable game board while transition is happening
+            // Then re-enable
             let i = 0;
             for (const tile of tiles) {
                 if (tile.getAttribute("data-index") == winningTileValues[i]) {
@@ -366,7 +370,9 @@ const gamePage = (() => {
     })();
 
     const game = (() => {
-        const checkForPlayerOneWin = (tileValues) => {
+        const checkForWin = (player) => {
+        const tileValues = gameBoard.getTileValues();
+        if (player === "one") {
             return (
                 tileValues[0] === "X" && tileValues[1] === "X" && tileValues[2] === "X"
                 || tileValues[0] === "X" && tileValues[4] === "X" && tileValues[8] === "X"
@@ -377,9 +383,8 @@ const gamePage = (() => {
                 || tileValues[3] === "X" && tileValues[4] === "X" && tileValues[5] === "X"
                 || tileValues[6] === "X" && tileValues[7] === "X" && tileValues[8] === "X"
             )
-        };
-
-        const checkForPlayerTwoWin = (tileValues) => {
+        }
+        if (player === "two") {
             return (
                 tileValues[0] === "O" && tileValues[1] === "O" && tileValues[2] === "O"
                 || tileValues[0] === "O" && tileValues[4] === "O" && tileValues[8] === "O"
@@ -390,9 +395,10 @@ const gamePage = (() => {
                 || tileValues[3] === "O" && tileValues[4] === "O" && tileValues[5] === "O"
                 || tileValues[6] === "O" && tileValues[7] === "O" && tileValues[8] === "O"
             )
+        }
         };
 
-        const displayWinnerPopup = (player, tiles) => {
+        const displayWinnerPopup = (player) => {
             if (player === "one") {
                 const name = document.querySelector(".player-one .name");
                 const winner = document.querySelector(".winner");
@@ -408,16 +414,11 @@ const gamePage = (() => {
             setTimeout(() => {
                 popup.style.display = "flex";
             }, 2600);
-            // for (const tile of tiles) {
-            //     tile.addEventListener("transitionend", e => {
-            //         setTimeout(() => {
-            //             popup.style.display = "flex";
-            //         }, 1300);
-            //     });
-            // }
         };
 
-        const displayWin = (player, tiles, tileValues) => {
+        const displayWin = (player) => {
+            const tiles = document.querySelectorAll(".row button");
+            const tileValues = gameBoard.getTileValues();
             if (
                 tileValues[0] === "X" && tileValues[1] === "X" && tileValues[2] === "X"
                 || tileValues[0] === "O" && tileValues[1] === "O" && tileValues[2] === "O"
@@ -467,7 +468,7 @@ const gamePage = (() => {
                 gameBoard.transformMark(tiles, [6, 7, 8]);
             }
 
-            displayWinnerPopup(player, tiles);
+            displayWinnerPopup(player);
         };
 
         const increaseScore = (player) => {
@@ -505,8 +506,7 @@ const gamePage = (() => {
         };
 
         return {
-            checkForPlayerOneWin,
-            checkForPlayerTwoWin,
+            checkForWin,
             displayWin,
             increaseScore,
             changeRoundNum,
@@ -526,8 +526,8 @@ const gamePage = (() => {
         helperFunctions.hideElements(gamePage, homePopup, roundOverPopup, overlay);
     });
     
-    const gameBoardTiles = document.querySelectorAll(".game-board button");
-    for (const tile of gameBoardTiles) {
+    const tiles = document.querySelectorAll(".row button");
+    for (const tile of tiles) {
         tile.addEventListener("click", e => {
             const winnerPopup = document.querySelector(".winner-popup");
             const winnerPopupProps = window.getComputedStyle(winnerPopup);
@@ -541,20 +541,22 @@ const gamePage = (() => {
             
             if (player === "one") {
                 playerOne.makeMove(tile);
-                const tileValues = gameBoard.getTileValues(gameBoardTiles);
-                if (game.checkForPlayerOneWin(tileValues)) {
-                    game.displayWin(player, gameBoardTiles, tileValues);
+                if (game.checkForWin(player)) {
+                    game.displayWin(player);
                     game.increaseScore(player);
                 }
+                // if (game is a tie)
+                // do stuff here
                 player = "two";
             }
             else if (player === "two") {
                 playerTwo.makeMove(tile);
-                const tileValues = gameBoard.getTileValues(gameBoardTiles);
-                if (game.checkForPlayerTwoWin(tileValues)) {
-                    game.displayWin(player, gameBoardTiles, tileValues);
+                if (game.checkForWin(player)) {
+                    game.displayWin(player);
                     game.increaseScore(player);
                 }
+                // if (game is a tie)
+                // do stuff here
                 player = "one";
             }
         });
