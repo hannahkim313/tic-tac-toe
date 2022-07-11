@@ -246,6 +246,7 @@ const playersPage = (() => {
     window.addEventListener("pageshow", e => {
         const playersPage = document.querySelector(".players-page");
         helperFunctions.hideElements(playersPage);
+
         loadIcons();
     });
 
@@ -271,28 +272,36 @@ const playersPage = (() => {
     const playerOneLeftBtn = document.querySelector(".player-one .left");
     playerOneLeftBtn.addEventListener("click", e => {
         playerOneIndex--;
+
         displayIcon(playerOneIndex, "one");
+
         resetIndex("one");
     });
 
     const playerOneRightBtn = document.querySelector(".player-one .right");
     playerOneRightBtn.addEventListener("click", e => {
         playerOneIndex++;
+
         displayIcon(playerOneIndex, "one");
+
         resetIndex("one");
     });
 
     const playerTwoLeftBtn = document.querySelector(".player-two .left");
     playerTwoLeftBtn.addEventListener("click", e => {
         playerTwoIndex--;
+
         displayIcon(playerTwoIndex, "two");
+
         resetIndex("two");
     });
     
     const playerTwoRightBtn = document.querySelector(".player-two .right");
     playerTwoRightBtn.addEventListener("click", e => {
         playerTwoIndex++;
+
         displayIcon(playerTwoIndex, "two");
+
         resetIndex("two");
     });
 
@@ -309,13 +318,17 @@ const playersPage = (() => {
     const submitButton = document.querySelector(".submit");
     submitButton.addEventListener("click", e => {
         e.preventDefault();
+
         displayFinalPlayerIcon("one", playerOneFinalIconIndex);
         displayFinalPlayerIcon("two", playerTwoFinalIconIndex);
+
         if (!playerOneFinalName.textContent) playerOneFinalName.textContent = "Player 1";
         if (!playerTwoFinalName.textContent) playerTwoFinalName.textContent = "Player 2";
+
         const playersPage = document.querySelector(".players-page");
         const gamePage = document.querySelector(".game-page");
         helperFunctions.switchPageDisplay(playersPage, gamePage);
+
         const playerOneGamePageIconContainer = document.querySelector(
             ".game-page .player-one .img-container"
         );
@@ -522,10 +535,12 @@ const gamePage = (() => {
         const reset = () => {
             const round = document.querySelector(".heading p");
             round.textContent = "Round 1";
+
             const scores = document.querySelectorAll(".score");
             for (const score of scores) {
                 score.textContent = "0";
             }
+            
             gameBoard.clearBoard();
         };
 
@@ -611,9 +626,13 @@ const gamePage = (() => {
     continueButtonWinner.addEventListener("click", e => {
         const winnerPopup = document.querySelector(".winner-popup");
         helperFunctions.hideElements(winnerPopup);
+
         gameBoard.clearBoard();
+
         game.changeRoundNum();
+
         game.makePlayerActive(player);
+
         const tiles = document.querySelectorAll(".row button");
         for (const tile of tiles) {
             tile.disabled = false;
@@ -625,9 +644,13 @@ const gamePage = (() => {
     continueButtonTie.addEventListener("click", e => {
         const tiePopup = document.querySelector(".tie-popup");
         helperFunctions.hideElements(tiePopup);
+
         gameBoard.clearBoard();
+
         game.changeRoundNum();
+
         game.makePlayerActive(player);
+
         const tiles = document.querySelectorAll(".row button");
         for (const tile of tiles) {
             tile.disabled = false;
@@ -641,12 +664,15 @@ const gamePage = (() => {
         if (helperFunctions.matchesComputedPropValue(winnerPopup, "display", "flex")) {
             helperFunctions.hideElements(winnerPopup);
         }
+
         const tiePopup = document.querySelector(".tie-popup");
         if (helperFunctions.matchesComputedPropValue(tiePopup, "display", "flex")) {
             helperFunctions.hideElements(tiePopup);
         }
+
         const homePopup = document.querySelector(".home-popup");
         homePopup.style.display = "flex";
+
         const overlay = document.querySelector(".overlay");
         overlay.style.display = "initial";
     });
@@ -663,6 +689,7 @@ const gamePage = (() => {
         ) {
             winnerPopup.style.display = "flex";
         }
+
         const tiePopup = document.querySelector(".tie-popup");
         if (
             helperFunctions.matchesComputedPropValue(tiePopup, "display", "none")
@@ -670,6 +697,7 @@ const gamePage = (() => {
         ) {
             tiePopup.style.display = "flex";
         }
+
         const homePopup = document.querySelector(".home-popup");
         const overlay = document.querySelector(".overlay");
         helperFunctions.hideElements(homePopup, overlay);
@@ -681,12 +709,15 @@ const gamePage = (() => {
         if (helperFunctions.matchesComputedPropValue(winnerPopup, "display", "flex")) {
             helperFunctions.hideElements(winnerPopup);
         }
+
         const tiePopup = document.querySelector(".tie-popup");
         if (helperFunctions.matchesComputedPropValue(tiePopup, "display", "flex")) {
             helperFunctions.hideElements(tiePopup);
         }
+
         const resetPopup = document.querySelector(".reset-popup");
         resetPopup.style.display = "flex";
+
         const overlay = document.querySelector(".overlay");
         overlay.style.display = "initial";
     });
@@ -695,10 +726,14 @@ const gamePage = (() => {
     yesButtonReset.addEventListener("click", e => {
         const resetPopup = document.querySelector(".reset-popup");
         helperFunctions.hideElements(resetPopup);
+
         const overlay = document.querySelector(".overlay");
         helperFunctions.hideElements(overlay);
+
         game.reset();
-        game.makePlayerActive(player);
+
+        game.makePlayerActive("one");
+
         const tiles = document.querySelectorAll(".row button");
         for (const tile of tiles) {
             tile.disabled = false;
@@ -715,6 +750,7 @@ const gamePage = (() => {
         ) {
             winnerPopup.style.display = "flex";
         }
+
         const tiePopup = document.querySelector(".tie-popup");
         if (
             helperFunctions.matchesComputedPropValue(tiePopup, "display", "none")
@@ -722,6 +758,7 @@ const gamePage = (() => {
         ) {
             tiePopup.style.display = "flex";
         }
+        
         const resetPopup = document.querySelector(".reset-popup");
         const overlay = document.querySelector(".overlay");
         helperFunctions.hideElements(resetPopup, overlay);
