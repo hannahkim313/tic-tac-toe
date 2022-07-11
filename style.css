@@ -480,6 +480,21 @@ label {
     gap: 16px;
 }
 
+/* Selectors for the continue popup start here. */
+
+.continue {
+    padding: 2px 8px;
+    
+    background-color: var(--main-grey);
+    border: none;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow-thin-grey);
+}
+
+.continue:hover {
+    background-color: var(--hover-grey);
+}
+
 /* Selectors for the home popup start here. */
 
 .home-popup {

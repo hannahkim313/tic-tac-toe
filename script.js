@@ -351,9 +351,17 @@ const gamePage = (() => {
             }
         };
 
+        const clearBoard = () => {
+            const tiles = document.querySelectorAll(".row button");
+            for (const tile of tiles) {
+                tile.textContent = "";
+            }
+        };
+
         return {
             getTileValues,
-            transformMark
+            transformMark,
+            clearBoard
         }
     })();
 
@@ -457,11 +465,6 @@ const gamePage = (() => {
             }
 
             displayWinnerPopup(player, tiles);
-
-            window.addEventListener("click", e => {
-                const popup = document.querySelector(".winner-popup");
-                helperFunctions.hideElements(popup);
-            });
         };
 
         const increaseScore = (player) => {
@@ -475,11 +478,26 @@ const gamePage = (() => {
             }
         };
 
+        const playNextRound = () => {
+            // window.addEventListener("click", e => {
+            //     const popup = document.querySelector(".winner-popup");
+            //     helperFunctions.hideElements(popup);
+            //     gameBoard.clearBoard();
+            // });
+            const continueButton = document.querySelector(".continue");
+            continueButton.addEventListener("click", e => {
+                const winnerPopup = document.querySelector(".winner-popup");
+                helperFunctions.hideElements(winnerPopup);
+                gameBoard.clearBoard();
+            });
+        };
+
         return {
             checkForPlayerOneWin,
             checkForPlayerTwoWin,
             displayWin,
-            increaseScore
+            increaseScore,
+            playNextRound
         }
     })();
 
@@ -514,6 +532,7 @@ const gamePage = (() => {
                 if (game.checkForPlayerOneWin(tileValues)) {
                     game.displayWin(player, gameBoardTiles, tileValues);
                     game.increaseScore(player);
+                    game.playNextRound();
                 };
                 // Change color of/animate winning play.
                 // Display pop up winning message?
@@ -529,6 +548,7 @@ const gamePage = (() => {
                 if (game.checkForPlayerTwoWin(tileValues)) {
                     game.displayWin(player, gameBoardTiles, tileValues);
                     game.increaseScore(player);
+                    game.playNextRound();
                 };
                 // Change color of/animate winning play.
                 // Display pop up winning message?
