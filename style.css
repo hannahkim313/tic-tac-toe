@@ -457,7 +457,8 @@ label {
 
 .winner-popup,
 .tie-popup,
-.home-popup {
+.home-popup,
+.reset-popup {
     width: 250px;
     height: 150px;
     
@@ -498,16 +499,18 @@ label {
     background-color: var(--hover-grey);
 }
 
-/* Selectors for the home popup start here. */
+/* Selectors for the "Yes" and "No" buttons start here. */
 
-.home-popup .buttons {
+.home-popup .buttons,
+.reset-popup .buttons {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 20px;
 }
 
-.home-popup .buttons button {
+.home-popup .buttons button,
+.reset-popup .buttons button {
     width: 48px;
     
     padding: 2px 4px;
@@ -518,7 +521,8 @@ label {
     box-shadow: var(--box-shadow-thin-grey);
 }
 
-.home-popup .buttons button:hover {
+.home-popup .buttons button:hover,
+.reset-popup .buttons button:hover {
     background-color: var(--hover-grey);
 }
 

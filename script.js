@@ -37,11 +37,17 @@ const helperFunctions = (() => {
         }
     };
 
+    const matchesComputedPropValue = (element, prop, propValue) => {
+        const elementProps = window.getComputedStyle(element);
+        return elementProps.getPropertyValue(prop) === propValue;
+    };
+
     return {
         changeOnMouseOver,
         changeOnmouseOut,
         switchPageDisplay,
-        hideElements
+        hideElements,
+        matchesComputedPropValue
     }
 })();
 
@@ -513,13 +519,24 @@ const gamePage = (() => {
             }
         };
 
+        const reset = () => {
+            const round = document.querySelector(".heading p");
+            round.textContent = "Round 1";
+            const scores = document.querySelectorAll(".score");
+            for (const score of scores) {
+                score.textContent = "0";
+            }
+            gameBoard.clearBoard();
+        };
+
         return {
             checkForWin,
             checkForTie,
             displayWin,
             increaseScore,
             changeRoundNum,
-            makePlayerActive
+            makePlayerActive,
+            reset
         }
     })();
 
@@ -532,17 +549,19 @@ const gamePage = (() => {
         const homePopup = document.querySelector(".home-popup");
         const winnerPopup = document.querySelector(".winner-popup");
         const tiePopup = document.querySelector(".tie-popup");
+        const resetPopup = document.querySelector(".reset-popup");
         const overlay = document.querySelector(".overlay");
-        helperFunctions.hideElements(gamePage, homePopup, winnerPopup, tiePopup, overlay);
+        helperFunctions.hideElements(
+            gamePage, homePopup, winnerPopup, tiePopup, resetPopup, overlay
+        );
     });
     
     const tiles = document.querySelectorAll(".row button");
     for (const tile of tiles) {
         tile.addEventListener("click", e => {
             const winnerPopup = document.querySelector(".winner-popup");
-            const winnerPopupProps = window.getComputedStyle(winnerPopup);
             if (
-                winnerPopupProps.getPropertyValue("display") === "flex"
+                helperFunctions.matchesComputedPropValue(winnerPopup, "display", "flex")
                 || tile.textContent === "X"
                 || tile.textContent === "O"
             ) {
@@ -588,8 +607,8 @@ const gamePage = (() => {
         });
     }
 
-    const winnerContinueButton = document.querySelector(".winner-popup .continue");
-    winnerContinueButton.addEventListener("click", e => {
+    const continueButtonWinner = document.querySelector(".winner-popup .continue");
+    continueButtonWinner.addEventListener("click", e => {
         const winnerPopup = document.querySelector(".winner-popup");
         helperFunctions.hideElements(winnerPopup);
         gameBoard.clearBoard();
@@ -602,8 +621,8 @@ const gamePage = (() => {
         }
     });
 
-    const tieContinueButton = document.querySelector(".tie-popup .continue");
-    tieContinueButton.addEventListener("click", e => {
+    const continueButtonTie = document.querySelector(".tie-popup .continue");
+    continueButtonTie.addEventListener("click", e => {
         const tiePopup = document.querySelector(".tie-popup");
         helperFunctions.hideElements(tiePopup);
         gameBoard.clearBoard();
@@ -618,6 +637,14 @@ const gamePage = (() => {
 
     const homeButton = document.querySelector(".home");
     homeButton.addEventListener("click", e => {
+        const winnerPopup = document.querySelector(".winner-popup");
+        if (helperFunctions.matchesComputedPropValue(winnerPopup, "display", "flex")) {
+            helperFunctions.hideElements(winnerPopup);
+        }
+        const tiePopup = document.querySelector(".tie-popup");
+        if (helperFunctions.matchesComputedPropValue(tiePopup, "display", "flex")) {
+            helperFunctions.hideElements(tiePopup);
+        }
         const homePopup = document.querySelector(".home-popup");
         homePopup.style.display = "flex";
         const overlay = document.querySelector(".overlay");
@@ -629,9 +656,75 @@ const gamePage = (() => {
 
     const noButtonHome = document.querySelector(".home-popup .no");
     noButtonHome.addEventListener("click", e => {
+        const winnerPopup = document.querySelector(".winner-popup");
+        if (
+            helperFunctions.matchesComputedPropValue(winnerPopup, "display", "none")
+            && game.checkForWin("one") || game.checkForWin("two")
+        ) {
+            winnerPopup.style.display = "flex";
+        }
+        const tiePopup = document.querySelector(".tie-popup");
+        if (
+            helperFunctions.matchesComputedPropValue(tiePopup, "display", "none")
+            && game.checkForTie()
+        ) {
+            tiePopup.style.display = "flex";
+        }
         const homePopup = document.querySelector(".home-popup");
         const overlay = document.querySelector(".overlay");
         helperFunctions.hideElements(homePopup, overlay);
+    });
+
+    const resetButton = document.querySelector(".reset");
+    resetButton.addEventListener("click", e => {
+        const winnerPopup = document.querySelector(".winner-popup");
+        if (helperFunctions.matchesComputedPropValue(winnerPopup, "display", "flex")) {
+            helperFunctions.hideElements(winnerPopup);
+        }
+        const tiePopup = document.querySelector(".tie-popup");
+        if (helperFunctions.matchesComputedPropValue(tiePopup, "display", "flex")) {
+            helperFunctions.hideElements(tiePopup);
+        }
+        const resetPopup = document.querySelector(".reset-popup");
+        resetPopup.style.display = "flex";
+        const overlay = document.querySelector(".overlay");
+        overlay.style.display = "initial";
+    });
+    
+    const yesButtonReset = document.querySelector(".reset-popup .yes");
+    yesButtonReset.addEventListener("click", e => {
+        const resetPopup = document.querySelector(".reset-popup");
+        helperFunctions.hideElements(resetPopup);
+        const overlay = document.querySelector(".overlay");
+        helperFunctions.hideElements(overlay);
+        game.reset();
+        game.makePlayerActive(player);
+        const tiles = document.querySelectorAll(".row button");
+        for (const tile of tiles) {
+            tile.disabled = false;
+            tile.style.color = "var(--main-font-color)";
+        }
+    });
+
+    const noButtonReset = document.querySelector(".reset-popup .no");
+    noButtonReset.addEventListener("click", e => {
+        const winnerPopup = document.querySelector(".winner-popup");
+        if (
+            helperFunctions.matchesComputedPropValue(winnerPopup, "display", "none")
+            && game.checkForWin("one") || game.checkForWin("two")
+        ) {
+            winnerPopup.style.display = "flex";
+        }
+        const tiePopup = document.querySelector(".tie-popup");
+        if (
+            helperFunctions.matchesComputedPropValue(tiePopup, "display", "none")
+            && game.checkForTie()
+        ) {
+            tiePopup.style.display = "flex";
+        }
+        const resetPopup = document.querySelector(".reset-popup");
+        const overlay = document.querySelector(".overlay");
+        helperFunctions.hideElements(resetPopup, overlay);
     });
 
     const githubButton = document.querySelector(".github");
