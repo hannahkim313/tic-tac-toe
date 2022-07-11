@@ -349,10 +349,7 @@ const gamePage = (() => {
                     for (const tile of tiles) {
                         tile.disabled = true;
                     }
-                    tile.addEventListener("transitionend", e => {
-                        tile.style.fontSize = "1.3rem";
-                        tile.style.color = "var(--main-font-color)";
-                    });
+                    tile.addEventListener("transitionend", e => tile.style.fontSize = "1.3rem");
                     i++;
                 }
             }
@@ -486,9 +483,8 @@ const gamePage = (() => {
         };
 
         const changeRoundNum = () => {
-            // Fix if rounds hit double digits
             const round = document.querySelector(".heading p");
-            const num = round.textContent.charAt(round.textContent.length - 1);
+            const num = round.textContent.substring(5);
             round.textContent = `Round ${parseInt(num) + 1}`;
         };
 
@@ -548,20 +544,30 @@ const gamePage = (() => {
                 if (game.checkForWin(player)) {
                     game.displayWin(player);
                     game.increaseScore(player);
+                    game.makePlayerActive(player);
+                    player = "two";
                 }
                 // if (game is a tie)
                 // do stuff here
-                player = "two";
+                else {
+                    player = "two";
+                    game.makePlayerActive(player);
+                }
             }
             else if (player === "two") {
                 playerTwo.makeMove(tile);
                 if (game.checkForWin(player)) {
                     game.displayWin(player);
                     game.increaseScore(player);
+                    game.makePlayerActive(player);
+                    player = "one";
                 }
                 // if (game is a tie)
                 // do stuff here
-                player = "one";
+                else {
+                    player = "one";
+                    game.makePlayerActive(player);
+                }
             }
         });
     }
@@ -576,6 +582,7 @@ const gamePage = (() => {
         const tiles = document.querySelectorAll(".row button");
         for (const tile of tiles) {
             tile.disabled = false;
+            tile.style.color = "var(--main-font-color)";
         }
     });
 
