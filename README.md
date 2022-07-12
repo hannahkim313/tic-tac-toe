@@ -5,9 +5,9 @@ https://hannahkim313.github.io/tic-tac-toe/
 ## Project Summary
 
 This project exercise, created by The Odin Project, is a browser version of
-the game Tic-Tac-Toe that allows two players to play.
+the game Tic-Tac-Toe that allows two players to play against each other.
 
-## Note
+### Note
 
 This project is **not** responsive-friendly, so the game is only accessible
 on browsers with larger screens. However, I plan to make it responsive
