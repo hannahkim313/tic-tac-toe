@@ -96,15 +96,15 @@ const playersPage = (() => {
         }
     };
 
-    const displayIcon = (index, player) => {
-        const playerOneIcons = document.querySelectorAll(
-            ".players .player-one .img-container"
-        );
+    const displayIcon = (player) => {
         if (player === "one") {
+            const playerOneIcons = document.querySelectorAll(
+                ".players .player-one .img-container"
+            );
             for (const icon of playerOneIcons) {
-                if (index > playerOneIcons.length) index = 1;
-                if (index < 1) index = playerOneIcons.length;
-                if (icon === playerOneIcons[index - 1]) {
+                if (playerOneIndex > playerOneIcons.length) playerOneIndex = 1;
+                if (playerOneIndex < 1) playerOneIndex = playerOneIcons.length;
+                if (icon === playerOneIcons[playerOneIndex - 1]) {
                     icon.style.display = "block";
                     playerOneFinalIconIndex = icon.firstElementChild.getAttribute("data-index");
                 }
@@ -116,9 +116,9 @@ const playersPage = (() => {
                 ".players .player-two .img-container"
             );
             for (const icon of playerTwoIcons) {
-                if (index > playerTwoIcons.length) index = 1;
-                if (index < 1) index = playerTwoIcons.length;
-                if (icon === playerTwoIcons[index - 1]) {
+                if (playerTwoIndex > playerTwoIcons.length) playerTwoIndex = 1;
+                if (playerTwoIndex < 1) playerTwoIndex = playerTwoIcons.length;
+                if (icon === playerTwoIcons[playerTwoIndex - 1]) {
                     icon.style.display = "block";
                     playerTwoFinalIconIndex = icon.firstElementChild.getAttribute("data-index");
                 }
@@ -269,28 +269,28 @@ const playersPage = (() => {
     const playerOneLeftBtn = document.querySelector(".player-one .left");
     playerOneLeftBtn.addEventListener("click", e => {
         playerOneIndex--;
-        displayIcon(playerOneIndex, "one");
+        displayIcon("one");
         resetIndex("one");
     });
 
     const playerOneRightBtn = document.querySelector(".player-one .right");
     playerOneRightBtn.addEventListener("click", e => {
         playerOneIndex++;
-        displayIcon(playerOneIndex, "one");
+        displayIcon("one");
         resetIndex("one");
     });
 
     const playerTwoLeftBtn = document.querySelector(".player-two .left");
     playerTwoLeftBtn.addEventListener("click", e => {
         playerTwoIndex--;
-        displayIcon(playerTwoIndex, "two");
+        displayIcon("two");
         resetIndex("two");
     });
     
     const playerTwoRightBtn = document.querySelector(".player-two .right");
     playerTwoRightBtn.addEventListener("click", e => {
         playerTwoIndex++;
-        displayIcon(playerTwoIndex, "two");
+        displayIcon("two");
         resetIndex("two");
     });
 
