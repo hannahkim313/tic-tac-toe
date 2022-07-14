@@ -325,9 +325,9 @@ const playersPage = (() => {
 
 const gamePage = (() => {
     const Player = (mark) => {
-        const getMark = () => mark;
+        const _getMark = () => mark;
 
-        const makeMove = (tile) => tile.textContent = getMark();
+        const makeMove = (tile) => tile.textContent = _getMark();
 
         return {
             makeMove
@@ -410,7 +410,7 @@ const gamePage = (() => {
             return tileValues.every(gameBoard.isTileFilled);
         };
 
-        const displayWinnerPopup = (player) => {
+        const _displayWinnerPopup = (player) => {
             if (player === "one") {
                 const name = document.querySelector(".player-one .name");
                 const winner = document.querySelector(".winner");
@@ -478,7 +478,7 @@ const gamePage = (() => {
             ) {
                 gameBoard.transformMark(tiles, [6, 7, 8]);
             }
-            displayWinnerPopup(player);
+           _displayWinnerPopup(player);
         };
 
         const increaseScore = (player) => {
