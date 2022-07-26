@@ -19,7 +19,7 @@ const helperFunctions = (() => {
         }, 200);
     };
 
-    const changeOnmouseOut = (initialImg, newImg) => {
+    const changeOnMouseOut = (initialImg, newImg) => {
         setTimeout(() => {
             initialImg.style.display = "initial";
             newImg.style.display = "none";
@@ -44,7 +44,7 @@ const helperFunctions = (() => {
 
     return {
         changeOnMouseOver,
-        changeOnmouseOut,
+        changeOnMouseOut,
         switchPageDisplay,
         hideElements,
         matchesComputedPropValue
@@ -64,7 +64,7 @@ const homePage = (() => {
     playButton.addEventListener("mouseout", e => {
         const greenIcon = playButton.firstElementChild;
         const whiteIcon = greenIcon.nextElementSibling;
-        helperFunctions.changeOnmouseOut(greenIcon, whiteIcon);
+        helperFunctions.changeOnMouseOut(greenIcon, whiteIcon);
     });
 
     playButton.addEventListener("click", e => {
@@ -257,7 +257,7 @@ const playersPage = (() => {
     backButton.addEventListener("mouseout", e => {
         const greenArrow = backButton.firstElementChild;
         const whiteArrow = greenArrow.nextElementSibling;
-        helperFunctions.changeOnmouseOut(greenArrow, whiteArrow);
+        helperFunctions.changeOnMouseOut(greenArrow, whiteArrow);
     });
 
     backButton.addEventListener("click", e => {
