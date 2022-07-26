@@ -568,7 +568,6 @@ const gamePage = (() => {
                 if (game.checkForWin(player)) {
                     game.displayWin(player);
                     game.increaseScore(player);
-                    game.makePlayerActive(player);
                     player = "two";
                 }
                 else if (game.checkForTie()) {
@@ -586,7 +585,6 @@ const gamePage = (() => {
                 if (game.checkForWin(player)) {
                     game.displayWin(player);
                     game.increaseScore(player);
-                    game.makePlayerActive(player);
                     player = "one";
                 }
                 else if (game.checkForTie()) {
